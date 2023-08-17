@@ -1,0 +1,15 @@
+.container {
+  margin-bottom: 40px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px 10px;
+}
+.title {
+  color: #606060;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  font-weight: 700;
+}

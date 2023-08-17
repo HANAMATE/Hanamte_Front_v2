@@ -1,0 +1,39 @@
+.outerBox {
+  width: 100%;
+  height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+}
+.innerBox {
+  width: 100%;
+  max-width: 480px;
+  padding: 0px 15px 0px 15px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+}
+.withHeader {
+  padding-top: 74px;
+}
+.withoutHeader {
+  padding-top: 0px;
+}
+.withFooter {
+  padding-bottom: 80px;
+}
+.withoutFooter {
+  padding-bottom: 20px;
+}
+.fixedBox {
+  position: fixed;
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  background-color: #f9f9f9;
+  z-index: -1;
+}
+.marginTop {
+  width: 100%;
+  height: 20px;
+}

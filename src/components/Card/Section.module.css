@@ -1,0 +1,61 @@
+.container {
+  width: 100%;
+}
+.titleBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.community {
+  padding: 0 15px 0 15px;
+}
+.title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.seeMore {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  opacity: 0.75;
+}
+.violet {
+  color: var(--violet2);
+}
+.blue {
+  color: var(--blue4);
+}
+.yellow {
+  color: var(--yellow2);
+}
+.red {
+  color: var(--red2);
+}
+.default {
+  color: var(--blue2);
+}
+.seeMoreText {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1rem;
+}
+.contentBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.alertBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.alertMessage {
+  font-weight: 700;
+}

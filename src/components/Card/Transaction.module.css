@@ -1,0 +1,51 @@
+.container {
+  display: flex;
+  width: 100%;
+  padding: 20px 0 20px 0;
+}
+.line {
+  width: 100%;
+  height: 0.5px;
+  background-color: #eee;
+}
+.dateBox {
+  width: 20%;
+}
+.descriptionBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
+  width: 50%;
+}
+.title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+.subTitle {
+  color: var(--red2);
+  font-weight: 500;
+}
+.amountBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 5px;
+  width: 30%;
+}
+.change {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+.remain {
+  color: #aaa;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+.in {
+  color: var(--red2);
+}
+.out {
+  color: var(--blue2);
+}

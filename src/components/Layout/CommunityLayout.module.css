@@ -1,0 +1,18 @@
+.outerBox {
+  width: 100%;
+  height: 100vh;
+  max-width: 480px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  box-sizing: border-box;
+  padding-top: 44px;
+}
+.fixedBox {
+  top: 0;
+  position: fixed;
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  background-color: #f9f9f9;
+  z-index: -1;
+}

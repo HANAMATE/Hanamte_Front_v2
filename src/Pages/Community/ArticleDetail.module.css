@@ -1,0 +1,67 @@
+.container {
+  width: 100%;
+  margin-top: 45px;
+}
+.titleBox {
+  width: 100%;
+  height: 60px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+blue1 {
+  color: var(--blue1);
+}
+.left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.title {
+  font-size: 1rem;
+  font-weight: 700;
+}
+.subTitle {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #aaa;
+}
+.image {
+  width: 100vw;
+}
+.replyBox {
+  padding: 15px 15px 15px 15px;
+}
+.replyHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.replyHeader p {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.textBox {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.reply {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+.reply .name {
+  font-weight: 700;
+}
+.reply .content {
+  font-size: 0.9rem;
+  font-weight: 500;
+}

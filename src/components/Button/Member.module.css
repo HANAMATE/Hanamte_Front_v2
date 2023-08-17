@@ -1,0 +1,29 @@
+.member {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: none;
+}
+.profile {
+  display: flex;
+  gap: 10px;
+}
+.member .namePhone {
+  height: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.member .name {
+  font-size: 1rem;
+  font-weight: 700;
+  text-align: start;
+}
+.member .phone {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  font-weight: 500;
+  text-align: start;
+}

@@ -1,0 +1,29 @@
+.footerBox {
+  position: fixed;
+  bottom: 0;
+  border-top: 1px solid #ccc;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  height: 3.5rem;
+  background: #ffffff;
+  left: 0;
+}
+.footerIconBox {
+  display: flex;
+  align-items: center;
+}
+.footerIcon {
+  width: 24px;
+  height: 24px;
+  margin: 10px 10px;
+  fill: black;
+}
+
+@media (min-width: 480px) {
+  .footerBox {
+    left: calc(50% - 240px);
+  }
+}

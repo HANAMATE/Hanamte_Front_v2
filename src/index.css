@@ -1,13 +1,190 @@
-body {
+@charset "utf-8";
+@import url("https://static.toss.im/tps/main.css");
+@import url("https://static.toss.im/tps/others.css");
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+button,
+audio,
+video {
+  box-sizing: border-box;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+a {
+  text-decoration: none;
+}
+body {
+  font-family: "Toss Product Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  height: 100%;
+  /* background-color: #f9f9f9; */
+  /* background-color: #ddd; */
+  background-color: #f9deff;
+}
+
+html {
+  height: 100%;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: "Toss Product Sans", sans-serif;
+}
+
+:root {
+  color: #121212;
+  --main-color-dark: #6527be;
+  --main-color: #9681eb;
+  --main-color-light: #d6d6ff;
+  --main-color-superlight: #eaeaff;
+  --secondary-color-dark: #8000ff;
+  --secondary-color: #9900ff;
+  --home-color-purple: #5f4de9;
+  --home-color-sky: #22a2c9;
+  --home-color-orange: #f88a24;
+  --home-color-red: #fc2a6a;
+
+  --red1: #ed6a9e;
+  --red2: #f25871;
+  --yellow1: #eea05b;
+  --yellow2: #e1995a;
+  --yellow3: #fd9524;
+  --yellow4: #fec363;
+  --brown1: #d99459;
+  --brown2: #c0633a;
+  --green1: #67c8c1;
+  --green2: #9ed5c0;
+  --green3: #31d1a0;
+  --blue1: #95b0e5;
+  --blue2: #6a78b5;
+  --blue3: #5067e7;
+  --blue4: #657cff;
+  --violet1: #c39ff7;
+  --violet2: #9b65ff;
+  --violet3: #9681eb;
+  --gray1: #8a9bad;
+  --black1: #373a4d;
 }

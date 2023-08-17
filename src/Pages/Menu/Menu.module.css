@@ -1,0 +1,65 @@
+.container {
+  padding-top: 60px;
+}
+.profileContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+  gap: 5px;
+}
+.name {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.picture {
+  width: 100px;
+  margin: 0 auto;
+  margin-bottom: 5px;
+}
+.buttonContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 10px;
+}
+.menuButton {
+  width: 100%;
+  height: 70px;
+  border-radius: 8px;
+  border: none;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.12);
+  margin-bottom: 60px;
+  background: #fbfbfb;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 10px;
+}
+.menuButton img {
+  height: 50%;
+}
+.menuButton p {
+  font-size: 0.8rem;
+  color: #606060;
+}
+
+.linkContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.linkContainer .title {
+  font-size: 0.8rem;
+  color: #606060;
+}
+
+.linkContainer a {
+  color: #121212;
+  font-weight: 600;
+  text-decoration: none;
+}

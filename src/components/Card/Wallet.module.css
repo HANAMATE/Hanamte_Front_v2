@@ -1,0 +1,66 @@
+.wallet {
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 40px;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.32);
+}
+.violet {
+  background-color: var(--violet2);
+}
+.blue {
+  background-color: var(--blue4);
+}
+.yellow {
+  background-color: var(--yellow2);
+}
+.red1 {
+  background-color: var(--red1);
+}
+.red2 {
+  background-color: var(--red2);
+}
+.default {
+  background-color: var(--violet2);
+}
+.wallet .firstRow {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 60px;
+}
+.wallet .titleBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+.wallet .subTitle {
+  color: #f9f9f9;
+  font-weight: 700;
+}
+.wallet .title {
+  color: #f9f9f9;
+  font-size: 2rem;
+  font-weight: 700;
+}
+.wallet .secondRow {
+  display: flex;
+  justify-content: space-between;
+}
+.walletButton {
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  width: 60px;
+  height: 60px;
+}
+.walletButton p {
+  color: #f9f9f9;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 5px;
+}
+.wallet .thirdRow {
+  display: flex;
+  justify-content: space-between;
+  color: #f9f9f9;
+}

@@ -1,0 +1,31 @@
+.container {
+  padding-bottom: 80px;
+}
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #121212;
+  /* color: #606060; */
+}
+.seeMore {
+  border: none;
+  background: transparent;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #606060;
+  opacity: 0.8;
+}
+.bottom {
+  margin-top: 5rem;
+}
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}

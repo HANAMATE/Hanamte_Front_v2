@@ -1,0 +1,44 @@
+.firstSection {
+  width: 100%;
+  height: calc(100vh - 150px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.title {
+  margin-top: 10%;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.title strong {
+  color: var(--main-color-dark);
+}
+.subTitle {
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #aaa;
+  font-weight: 600;
+}
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 20px;
+  gap: 20px;
+  border-radius: 8px;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.16);
+}
+.imageBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+.imageBox img {
+  width: 50%;
+}

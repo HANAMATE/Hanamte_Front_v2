@@ -1,0 +1,35 @@
+.buttonContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.homeButton {
+  display: flex;
+  justify-content: space-between;
+  color: #fbfbfb;
+  width: calc(50% - 5px);
+  height: 120px;
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 1px 2px 6px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+.homeButton .leftContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: fit-content;
+  height: 100%;
+  text-align: start;
+}
+.homeButton .iconContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  width: fit-content;
+  height: 100%;
+}
