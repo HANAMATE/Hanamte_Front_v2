@@ -1,5 +1,7 @@
 import classes from "./SignLyaout.module.css";
-import MainIcon from "../../assets/MainIcon.gif";
+// import MainIcon from "../../assets/MainIcon.gif";
+import MainIcon from "../../assets/Main2.png";
+
 
 const SignLayout = (props) => {
   return (

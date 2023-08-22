@@ -14,8 +14,10 @@
   justify-content: center;
 }
 .iconContainer img {
-  width: 30%;
-  max-width: 100px;
+  width: 50%;
+  height: 200%
+  /* width: 30%;
+  max-width: 100px; */
 }
 
 @media (min-width: 480px) {
