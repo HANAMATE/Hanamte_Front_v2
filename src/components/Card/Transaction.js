@@ -7,7 +7,7 @@ const Transaction = (props) => {
   return (
     <Fragment>
       <div className={classes.container}>
-        <div className={classes.dateBox}>{props.date}</div>
+        <div className={classes.dateBox}>{props.date.substring(5, 10)}</div>
         <div className={classes.descriptionBox}>
           <p className={classes.title}>{props.title}</p>
           <p className={classes.subTitle}>{props.subTitle}</p>

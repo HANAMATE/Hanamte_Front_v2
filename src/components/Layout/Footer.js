@@ -1,6 +1,13 @@
 import { NavLink } from "react-router-dom";
 import classes from "./Footer.module.css";
-import { HouseDoor, HouseDoorFill, Bell, BellFill, Calendar2, Calendar2Fill } from "react-bootstrap-icons";
+import {
+  HouseDoor,
+  HouseDoorFill,
+  Bell,
+  BellFill,
+  Calendar2,
+  Calendar2Fill,
+} from "react-bootstrap-icons";
 import { PiSquaresFour, PiSquaresFourFill } from "react-icons/pi";
 
 const Footer = (props) => {
@@ -10,14 +17,22 @@ const Footer = (props) => {
         <NavLink to="/">
           {({ isActive }) =>
             isActive ? (
-              <HouseDoorFill className={classes.footerIcon} size="24" color="#212121" />
+              <HouseDoorFill
+                className={classes.footerIcon}
+                size="24"
+                color="#212121"
+              />
             ) : (
-              <HouseDoor className={classes.footerIcon} size="24" color="#212121" />
+              <HouseDoor
+                className={classes.footerIcon}
+                size="24"
+                color="#212121"
+              />
             )
           }
         </NavLink>
       </div>
-      <div className={classes.footerIconBox}>
+      {/* <div className={classes.footerIconBox}>
         <NavLink to="/notification">
           {({ isActive }) =>
             isActive ? (
@@ -38,14 +53,22 @@ const Footer = (props) => {
             )
           }
         </NavLink>
-      </div>
+      </div> */}
       <div className={classes.footerIconBox}>
         <NavLink to="/menu">
           {({ isActive }) =>
             isActive ? (
-              <PiSquaresFourFill className={classes.footerIcon} size="24" color="#212121" />
+              <PiSquaresFourFill
+                className={classes.footerIcon}
+                size="24"
+                color="#212121"
+              />
             ) : (
-              <PiSquaresFour className={classes.footerIcon} size="24" color="#212121" />
+              <PiSquaresFour
+                className={classes.footerIcon}
+                size="24"
+                color="#212121"
+              />
             )
           }
         </NavLink>

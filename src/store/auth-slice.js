@@ -5,34 +5,39 @@ const authSlice = createSlice({
   initialState: {
     isAuthenticated: false,
     loginId: "",
-    expiredAt: "",
     name: "",
     balance: 0,
-    isParent: undefined,
+    userType: undefined,
     accessToken: "",
     refreshToken: "",
   },
   reducers: {
     login(state, action) {
-      const authInformation = action.payload;
       state.isAuthenticated = true;
-      state.loginId = authInformation.loginId;
-      state.expiredAt = authInformation.expiredAt;
-      state.name = authInformation.name;
-      state.balance = authInformation.balance;
-      state.isParent = authInformation.isParent;
-      state.accessToken = authInformation.accessToken;
-      state.refreshToken = authInformation.refreshToken;
+      state.loginId = action.payload.loginId;
+      state.name = action.payload.name;
+      state.userType = action.payload.userType;
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+    },
+    setUserId(state, action) {
+      state.loginId = action.payload.loginId;
     },
     setBalance(state, action) {
       state.balance = action.payload.balance;
     },
+    setToken(state, action) {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+    },
     logout(state) {
       state.isAuthenticated = false;
-      state.expiredAt = "";
+      state.loginId = "";
       state.name = "";
       state.balance = 0;
-      state.isParent = undefined;
+      state.userType = undefined;
+      state.accessToken = "";
+      state.refreshToken = "";
     },
   },
 });

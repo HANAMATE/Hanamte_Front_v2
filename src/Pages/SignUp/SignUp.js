@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import Input from "../../components/Input/Input";
 import Button1 from "../../components/Button/Button1";
@@ -7,15 +6,20 @@ import classes from "./SignUp.module.css";
 import useInput from "../../hooks/use-input";
 import { useNavigate } from "react-router-dom";
 import SignLayout from "../../components/Layout/SignLayout";
+import { fetchSignUp } from "../../apis/requests";
 
 const validateName = (name) => {
   return /^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z\s]+$/.test(name);
 };
 const validatePhone = (phone) => {
-  return /^[0-9]{11}$/.test(phone);
+  //return /^[0-9]{11}$/.test(phone);
+  return /^0\d{1,2}(-|\))\d{3,4}-\d{4}$/.test(phone);
 };
 const validateBirth = (birth) => {
-  return /^[0-9]{8}$/.test(birth);
+  //return /^[0-9]{8}$/.test(birth);
+  return /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))-[1-4][0-9]{6}$/.test(
+    birth
+  );
 };
 const validateID = (id) => {
   return /^[a-z0-9_-]{5,20}$/.test(id);
@@ -71,7 +75,7 @@ const SignUp = (props) => {
     inputBlurHandler: confirmationBlurHandler,
   } = useInput((value) => validateConfirmation(value, pwValue));
 
-  const [userType, setUserType] = useState("children");
+  const [userType, setUserType] = useState("Child");
   const [values, setValues] = useState({
     name: "",
     phone: "",
@@ -101,35 +105,31 @@ const SignUp = (props) => {
     setValues((prevValues) => ({
       ...prevValues,
       name: nameValue,
-      phone: phoneValue,
-      birth: birthValue,
+      phoneNumber: phoneValue,
+      identification: birthValue,
       id: idValue,
-      pw: pwValue,
-      type: userType,
+      password: pwValue,
+      userType: userType,
     }));
     setAllowSendRequest(true);
   };
 
-  /*
+  async function signIn() {
+    try {
+      await fetchSignUp(values);
+      navigate("/login");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setAllowSendRequest(false);
+    }
+  }
+
   useEffect(() => {
     if (allowSendRequest) {
-      axios.defaults.withCredentials = true;
-      axios
-        .post("http://localhost:8080/signup", values)
-        // .post("https://hanamate.onrender.com/signup", values)
-        .then((res) => {
-          if (res.data.Status === "Success") {
-            navigate("/login");
-          } else {
-            setAllowSendRequest(false);
-            setIsError(true);
-          }
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setAllowSendRequest(false));
+      signIn();
     }
-  }, [allowSendRequest, navigate, values]);
-  */
+  }, [allowSendRequest]);
 
   const [childrenButtonClass, setChildrenButtonClass] = useState(
     classes["selected"]
@@ -137,13 +137,13 @@ const SignUp = (props) => {
   const [parentsButtonClass, setParentsButtonClass] = useState("");
 
   const parentsHandler = () => {
-    setUserType("parents");
+    setUserType("Parent");
     setChildrenButtonClass("");
     setParentsButtonClass(classes["selected"]);
   };
 
   const childrenHandler = () => {
-    setUserType("children");
+    setUserType("Child");
     setChildrenButtonClass(classes["selected"]);
     setParentsButtonClass("");
   };
@@ -181,7 +181,7 @@ const SignUp = (props) => {
           errorMessage="이름을 다시 입력해주세요."
         />
         <Input
-          type="number"
+          type="text"
           id="phone"
           name="phone"
           label="phone"
@@ -193,16 +193,16 @@ const SignUp = (props) => {
           errorMessage="전화번호를 다시 입력해주세요."
         />
         <Input
-          type="number"
+          type="text"
           id="birth"
           name="birth"
           label="birth"
-          placeholder="생년월일 (8자리) *"
+          placeholder="주민등록번호 *"
           required={true}
           onChange={birthChangeHandler}
           onBlur={birthBlurHandler}
           error={birthInputHasError}
-          errorMessage="생년월일을 다시 입력해주세요."
+          errorMessage="주민등록번호를 다시 입력해주세요."
         />
         <Input
           type="text"
@@ -228,7 +228,7 @@ const SignUp = (props) => {
           error={pwInputHasError}
           errorMessage="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요."
         />
-        <Input
+        {/* <Input
           type="password"
           id="confirmation"
           name="confirmation"
@@ -239,7 +239,7 @@ const SignUp = (props) => {
           onBlur={confirmationBlurHandler}
           error={confirmationInputHasError}
           errorMessage="비밀번호가 일치하지 않습니다."
-        />
+        /> */}
         <input
           type="hidden"
           id="userType"

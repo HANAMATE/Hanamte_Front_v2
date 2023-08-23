@@ -9,6 +9,7 @@ const Wallet = (props) => {
     navigate("history");
   };
   const fillClickHandler = () => {
+    // axios로 내 계좌 잔액 가져오기 api 요청, 성공시 화면 이동+실패하면 alert
     navigate("fill");
   };
 
@@ -38,7 +39,9 @@ const Wallet = (props) => {
       <div className={classes.firstRow}>
         <div className={classes.titleBox}>
           <p className={classes.subTitle}>남은 용돈</p>
-          <p className={classes.title}>{Number(props.balance).toLocaleString()}원</p>
+          <p className={classes.title}>
+            {Number(props.balance).toLocaleString()}원
+          </p>
         </div>
         <div className={classes.iconBox}>
           <RiInformationFill fill="#f9f9f9" />
