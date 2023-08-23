@@ -42,7 +42,6 @@ const Home = (props) => {
         userId: loginId,
       })
       .then((res) => {
-        // axios.get("https://hanamate.onrender.com/").then((res) => {
         if (res.data.state === 200) {
           console.log(res.data.data.balance);
           dispatch(

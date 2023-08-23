@@ -18,6 +18,7 @@ import RequestSet from "./Pages/Allowance/ReqeustSet/RequestSet";
 import RequestEnd from "./Pages/Allowance/RequestEnd/RequestEnd";
 import CommunityAccount from "./Pages/Community/Account/CommunityAccount";
 import ArticleDetail from "./Pages/Community/ArticleDetail";
+import Loan from "./Pages/Loan/Loan";
 // import Error from "./Pages/Error/Error";
 
 const router = createBrowserRouter([
@@ -32,6 +33,7 @@ const router = createBrowserRouter([
       { path: "calendar", element: <Calendar /> },
       { path: "menu", element: <Menu /> },
       { path: "input", element: <SetAmount /> },
+      { path: "loan", element: <Loan /> },
       {
         path: "allowance",
         children: [
