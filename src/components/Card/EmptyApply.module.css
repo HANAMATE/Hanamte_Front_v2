@@ -25,8 +25,8 @@
 .emptyapply .firstRow {
   /* display: flex; */
   justify-content: space-between;
-  margin-bottom: 30px;
-  margin-top: 30px;
+  /* margin-bottom: 30px; */
+  /* margin-top: 30px; */
 }
 .emptyapply .titleBox {
   display: flex;
@@ -35,6 +35,10 @@
   gap: 10px;
 }
 
+.emptyapply .subTitle {
+  color: #f9f9f9;
+  font-weight: 500;
+}
 .emptyapply .title {
   color: #f9f9f9;
   font-size: 1.5rem;
@@ -44,20 +48,23 @@
 .emptyapply .secondRow {
   display: flex;
   justify-content: space-between;
+  justify-content: center;
+  align-items: center;
 }
-.walletButton {
+.applyButton {
   background: transparent;
   border: none;
   border-radius: 20px;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
 }
-.walletButton p {
+.applyButton p {
   color: #f9f9f9;
   font-size: 0.9rem;
   font-weight: 600;
   margin-top: 5px;
 }
+
 .wallet .thirdRow {
   display: flex;
   justify-content: space-between;

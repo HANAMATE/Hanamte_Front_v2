@@ -2,8 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { RiInformationFill } from "react-icons/ri";
 import { FaWallet, FaPercentage, FaCoins, FaMoneyCheck } from "react-icons/fa";
 // import classes from "./Wallet.module.css";
-import ApproveBtn from "../../components/Button/ApproveBtn";
-import RefuseBtn from "../../components/Button/RefuseBtn";
+import ApproveBtn from "../Button/ApproveBtn";
+import RefuseBtn from "../Button/RefuseBtn";
 import classes from "./ExistApply.module.css";
 
 const ExistApply = (props) => {
@@ -32,7 +32,7 @@ const ExistApply = (props) => {
     <div className={`${classes.existapply} ${existapplyColor}`}>
       <div className={classes.firstRow}>
         <div className={classes.titleBox}>
-          <p className={classes.subTitle}>아이가 용돈을 신청했어요!</p>
+          <p className={classes.subTitle}>아이가 대출을 신청했어요!</p>
           <p className={classes.title}>
             대출명 : {props.loanName.toLocaleString()}
           </p>

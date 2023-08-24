@@ -30,7 +30,7 @@ const EmptyApply = (props) => {
     <div className={`${classes.emptyapply} ${emptyapplyColor}`}>
       <div className={classes.firstRow}>
         <div className={classes.titleBox}>
-          <p className={classes.title}>신청받은 용돈이 없어요</p>
+          <p className={classes.title}>아이에게 신청받은 대출이 없어요</p>
         </div>
       </div>
       {/* <div className={classes.secondRow}>

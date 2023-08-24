@@ -3,8 +3,11 @@ import { useSelector } from "react-redux";
 
 import RootLayout from "../../components/Layout/RootLayout";
 import Header from "../../components/Layout/Header";
-// import EmptyApply from "../../components/Card/EmptyApply";
-import ExistApply from "../../components/Card/ExistApply";
+import ParentEmptyApply from "../../components/Card/ParentEmptyApply";
+import ParentExistApply from "../../components/Card/ParentExistApply";
+
+import ChildEmptyApply from "../../components/Card/ChildEmptyApply";
+import ChildExistApply from "../../components/Card/ChildExistApply";
 
 import Section from "../../components/Card/Section";
 import TransactionBox from "../../components/Card/TransactionBox";
@@ -19,16 +22,18 @@ const Loan = (props) => {
   const [loanInfo, setLoanInfo] = useState(null);
   const [dummy, setDummy] = useState([]);
   const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MyIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTI3ODM2Nzd9.64MvSqTgi0ssRxlnvs2FRDbhhPR7gXcAKZKxUMH4OfE";
-  const {
-    // isAuthenticated,
-    loanName,
-    loanAmount,
-    // balance,
-    loanMessage,
-    // accessToken,
-    // loginId,
-  } = useSelector((state) => state.auth);
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MyIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTI4OTIxNzF9.8Pies2qoVeAPMF2eK-qgoYadjXiDGry4z3flWYK8lMI";
+    const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
+
+  //   const {
+  //   // isAuthenticated,
+  //   loanName,
+  //   loanAmount,
+  //   // balance,
+  //   loanMessage,
+  //   // accessToken,
+  //   // loginId,
+  // } = useSelector((state) => state.auth);
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
@@ -44,22 +49,49 @@ const Loan = (props) => {
           console.log("Success on React Server");
           setLoanInfo(res.data.data);
           console.log(res.data.data);
-        } else {
+        } 
+        else if(res.data.state === 204){
+          // setLoanInfo(res.data.data);
+          console.log("대출 신청 내역이 없습니다");
+          setLoanInfo(res.data.data);
+          console.log(res.data.data);
+        }
+        else {
           console.log("토큰 유효기간이 끝났을 겁니당~");
         }
       });
   }, []);
+
+
   return (
     <RootLayout header={true}>
-      <Header left="back" title="내 지갑" right="blank" />
-      {/* <EmptyApply balance={balance} /> */}
-      {loanInfo && (
-        <ExistApply
-          loanName={loanInfo.loanName} // Pass the loanName prop
-          loanAmount={loanInfo.loanAmount} // Pass the loanAmount prop
-          loanMessage={loanInfo.loanMessage} // Pass the loanMessage prop
+      <Header left="back" title="대출 내역" right="blank" />
+      {loanInfo && loanInfo.userType === "Parent" ? (
+      loanInfo.loanName && loanInfo.loanAmount && loanInfo.loanMessage ? (
+        <ParentExistApply
+          loanName={loanInfo.loanName}
+          loanAmount={loanInfo.loanAmount}
+          loanMessage={loanInfo.loanMessage}
         />
-      )}
+      ) : (
+        <ParentEmptyApply />
+      )
+    ) : loanInfo && loanInfo.userType === "Child" ? (
+      loanInfo.loanName && loanInfo.loanAmount && loanInfo.loanMessage ? (
+        <ChildExistApply
+          loanName={loanInfo.loanName}
+          loanAmount={loanInfo.loanAmount}
+          loanMessage={loanInfo.loanMessage}
+        />
+      ) : (
+        <ChildEmptyApply />
+      )
+    ) : userType === "Parent" ? (
+      <ParentEmptyApply />
+    ) : (
+      <ChildEmptyApply />
+    )}
+
 
       <Section title="최근 거래내역" seeMore={true} seeMoreText="전체 거래내역">
         <TransactionBox>
