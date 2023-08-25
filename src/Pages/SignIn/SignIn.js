@@ -10,6 +10,8 @@ import Input from "../../components/Input/Input";
 import classes from "./SignIn.module.css";
 import RootLayout from "../../components/Layout/RootLayout";
 import { fetchLogin } from "../../apis/requests";
+import axios from "axios";
+import { updateAuthorizationHeader } from "../../apis/api";
 
 const validateID = (id) => {
   return /^[a-z0-9_-]{5,20}$/.test(id);
@@ -54,8 +56,11 @@ const SignIn = () => {
   async function login() {
     try {
       const response = await fetchLogin(values);
+      localStorage.removeItem("AccessToken");
+      localStorage.removeItem("RefreshToken");
       localStorage.setItem("AccessToken", response.headers["authorization"]);
       localStorage.setItem("RefreshToken", response.headers["x-refresh-token"]);
+      updateAuthorizationHeader();
       dispatch(
         authActions.login({
           loginId: response.data.data.userId,

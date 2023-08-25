@@ -18,6 +18,7 @@ import RequestSet from "./Pages/Allowance/ReqeustSet/RequestSet";
 import RequestEnd from "./Pages/Allowance/RequestEnd/RequestEnd";
 import CommunityAccount from "./Pages/Community/Account/CommunityAccount";
 import ArticleDetail from "./Pages/Community/ArticleDetail";
+import Success from "./Pages/Allowance/Success/Success";
 // import Error from "./Pages/Error/Error";
 
 const router = createBrowserRouter([
@@ -46,7 +47,13 @@ const router = createBrowserRouter([
             ],
           },
           { path: "history", element: <History /> },
-          { path: "fill", element: <Fill /> },
+          {
+            path: "fill",
+            children: [
+              { index: true, element: <Fill /> },
+              { path: "success", element: <Success /> },
+            ],
+          },
         ],
       },
     ],

@@ -1,13 +1,14 @@
-import { Fragment } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { PiMagnifyingGlassBold } from "react-icons/pi";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import Header from "../../../components/Layout/Header";
-import InputBox from "../../../components/Input/InputBox";
 import Member from "../../../components/Button/Member";
 import classes from "./Request.module.css";
 import RootLayout from "../../../components/Layout/RootLayout";
+import { fetchGetParent } from "../../../apis/requests";
+import { useSelector } from "react-redux";
 
+/*
 const DUMMY_MEMBER = [
   {
     id: 1,
@@ -38,28 +39,50 @@ const DUMMY_MEMBER_2 = [
     phone: "010-9510-2137",
   },
 ];
+*/
 
 const Request = (props) => {
+  const { loginId } = useSelector((state) => state.auth);
+  const [parent, setParent] = useState([]);
+
+  async function getParents() {
+    try {
+      const response = await fetchGetParent({ userId: loginId });
+      if (response.data.data !== []) {
+        setParent(response.data.data);
+      }
+    } catch (error) {
+      console.error("getParents 실패", error);
+    }
+  }
+
+  useEffect(() => {
+    getParents();
+  }, []);
+
   return (
     <RootLayout header={true}>
       <Header left="back" title="누구에게 달라고 할래요?" right="blank" />
       <section className={classes.firstSection}>
-        <InputBox left={<PiMagnifyingGlassBold size="24" fill="#aaa" />} placeholder="부모멤버의 연락처를 검색해봐요" />
-        <p className={classes.title}>즐겨찾는 멤버 1</p>
         <div className={classes.memberList}>
-          {DUMMY_MEMBER.map((member) => (
-            <Link key={member.id} to="set" state={{ id: member.id, name: member.name }}>
-              <Member key={member.id} name={member.name} phone={member.phone} starred={true} />
+          {parent.map((member) => (
+            <Link
+              key={member.userIdx}
+              to="set"
+              state={{
+                id: member.userIdx,
+                name: member.name,
+                userId: member.userId,
+              }}
+            >
+              <Member
+                key={member.userIdx}
+                userId={member.userId}
+                name={member.userId}
+                phone={member.phone}
+                starred={true}
+              />
             </Link>
-          ))}
-        </div>
-      </section>
-      <div className={classes.line} />
-      <section className={classes.SecondSection}>
-        <p className={classes.title}>검색된 멤버</p>
-        <div className={classes.memberList}>
-          {DUMMY_MEMBER_2.map((member) => (
-            <Member key={member.id} name={member.name} phone={member.phone} starred={false} />
           ))}
         </div>
       </section>

@@ -2,16 +2,60 @@ import { useNavigate } from "react-router-dom";
 import { RiInformationFill } from "react-icons/ri";
 import { FaWallet, FaPercentage, FaCoins, FaMoneyCheck } from "react-icons/fa";
 import classes from "./Wallet.module.css";
+import { fetchBalance, getMyAccount } from "../../apis/requests";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../../store/auth-slice";
+import { useEffect } from "react";
 
 const Wallet = (props) => {
+  const { loginId } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const walletClickHandler = () => {
     navigate("history");
   };
-  const fillClickHandler = () => {
-    // axios로 내 계좌 잔액 가져오기 api 요청, 성공시 화면 이동+실패하면 alert
-    navigate("fill");
+
+  async function getAccountInfo() {
+    try {
+      const response = await getMyAccount();
+      if (response.data.state === 200) {
+        dispatch(
+          authActions.setAccountBalance({
+            accountBalance: response.data.data.balance,
+          })
+        );
+      }
+      return response;
+    } catch (error) {
+      console.error("getBalance 실패", error);
+    }
+  }
+
+  const fillClickHandler = async () => {
+    const response = await getAccountInfo();
+
+    if (response.data.state === 200) {
+      navigate("fill");
+    } else {
+      alert("연결된 계좌가 없습니다.");
+    }
   };
+
+  useEffect(() => {
+    async function getbalance() {
+      try {
+        const response = await fetchBalance({ userId: loginId });
+        dispatch(
+          authActions.setBalance({
+            balance: response.data.data.balance,
+          })
+        );
+      } catch (error) {
+        console.error("getBalance 실패", error);
+      }
+    }
+    getbalance();
+  }, []);
 
   let walletColor = "";
   switch (props.color) {

@@ -1,9 +1,20 @@
 import { Fragment } from "react";
 import classes from "./HomeTitle.module.css";
 import { useNavigate } from "react-router-dom";
+import Button1 from "../../../components/Button/Button1";
+import { useDispatch } from "react-redux";
+import { authActions } from "../../../store/auth-slice";
 
 const HomeTitle = (props) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const onClickHandler = () => {
+    dispatch(authActions.logout());
+    localStorage.removeItem("AccessToken");
+    localStorage.removeItem("RefreshToken");
+    navigate("/login");
+  };
 
   return (
     <Fragment>
@@ -17,8 +28,13 @@ const HomeTitle = (props) => {
         </header>
       ) : (
         <header className={`${classes.headerButton} ${classes.homeHeader}`}>
-          <p className={classes.firstText}>{props.name}</p>
-          <p className={classes.secondText}>내 지갑 {props.balance}원</p>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <div>
+              <p className={classes.firstText}>{props.name}</p>
+              <p className={classes.secondText}>내 지갑 {props.balance}원</p>
+            </div>
+            <button onClick={onClickHandler}>로그아웃</button>
+          </div>
         </header>
       )}
     </Fragment>

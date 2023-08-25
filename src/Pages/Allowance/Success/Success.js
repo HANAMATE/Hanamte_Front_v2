@@ -2,20 +2,14 @@ import RootLayout from "../../../components/Layout/RootLayout";
 import SetAmount from "../../../components/SetAmount/SetAmount";
 import { useSelector } from "react-redux";
 
-const Fill = () => {
+const Success = () => {
   const { accountBalance } = useSelector((state) => state.auth);
 
   return (
     <RootLayout>
-      <SetAmount
-        type="fill"
-        title="충전하기"
-        subMessage="충전계좌 잔액"
-        balance={accountBalance}
-        buttonMessage="충전하기"
-      />
+      <div>계좌에서 가져오기 성공</div>
     </RootLayout>
   );
 };
 
-export default Fill;
+export default Success;
