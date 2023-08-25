@@ -1,80 +1,152 @@
 .formContainer {
-    box-sizing: border-box;
-    width: 100%;
-    margin-top: 2rem;
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08); */
-    max-width: 480px;
-  }
-  
-  .formContainer h1 {
-    color: #000;
-    text-align: center;
-    /* text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25); */
-    font-size: 32px;
-    font-weight: 700;
-    /* margin-top: 20vh; */
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-  }
-  
-  .helperContainer {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .helperContainer a {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #000000;
-    opacity: 0.5;
-  }
-  
-  .helperContainer a:hover {
-    text-decoration: underline;
-  }
-  
-  .linkContainer {
-    width: 100%;
-  }
-  
-  .typeSelector {
-    width: 100%;
-  }
-  
-  .typeSelector button {
-    width: 50%;
-    height: 2.5rem;
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    color: #888888;
-    border-bottom: 1px solid #ccc;
-    border-radius: 0px;
-    margin-bottom: 20px;
-    cursor: pointer;
-  }
-  
-  .typeSelector .selected {
-    border-bottom: 2px solid #9681eb;
-  }
-  
-  .errorMessage {
-    font-size: 0.9rem;
-    color: red;
-    opacity: 0.9;
-    margin-bottom: 20px;
-  }
-  
+  box-sizing: border-box;
+  width: 100%;
+  /* margin-top: 2rem; */
+  /* background-color: #ffffff; */
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  /* box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08); */
+  max-width: 480px;
+}
+
+.formContainer input {
+  margin-top: 1rem;
+  color: #000;
+  text-align: center;
+  background-color: #ffffff;
+  text-shadow: 0px 8px 8px rgba(0, 0, 0, 0.25);
+  font-size: 32px;
+  font-weight: 700;
+  /* margin-top: 20vh; */
+  /* margin-top: 1rem; */
+  /* margin-bottom: 1rem; */
+}
+
+.interestRate {
+  /* text-align: right; */
+  margin-bottom: 0.5rem;
+}
+
+.interestRate span {
+  font-weight: bold;
+}
+
+.formContainer h2 {
+  font-weight: bold;
+  font-size: 22px;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.calcContainer h3 {
+  margin-top: 1.5rem;
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 1rem;
+}
+
+.calcContainer p {
+  margin-bottom: 0.5rem;
+}
+
+.calcContainer span {
+  font-weight: bold;
+}
+
+.calcContainer ul {
+  margin-bottom: 2rem;
+}
+
+.listHeader {
+  display: grid;
+  border-bottom: 1px solid #888888;
+  grid-template-columns: 1fr 1fr 1fr;
+  font-weight: bold;
+  padding-top: 5px;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.listItem {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ccc;
+  /* border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc; */
+  text-align: center;
+}
+
+.input2 p {
+  margin-top: 1rem;
+}
+
+.input2 input {
+  color: #000;
+  text-align: left;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.helperContainer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.helperContainer a {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #000000;
+  opacity: 0.5;
+}
+
+.helperContainer a:hover {
+  text-decoration: underline;
+}
+
+.linkContainer {
+  width: 100%;
+}
+
+.typeSelector {
+  width: 100%;
+}
+
+.durationButtons button {
+  width: 33.3%;
+  height: 2.5rem;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: #888888;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 1rem;
+}
+
+.durationButtons .selected {
+  background-color: #81a6eb;
+  color: white;
+}
+
+.errorMessage {
+  font-size: 0.9rem;
+  color: red;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}

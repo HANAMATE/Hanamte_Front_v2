@@ -22,8 +22,8 @@ const Loan = (props) => {
   const [loanInfo, setLoanInfo] = useState(null);
   const [dummy, setDummy] = useState([]);
   const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MyIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTI4OTIxNzF9.8Pies2qoVeAPMF2eK-qgoYadjXiDGry4z3flWYK8lMI";
-    const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MyIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMwMzUwNTN9.0YwaoEheTplEXs48vUqqKuxq_F9euvCS59D6qHy_a9Y";
+  const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
 
   //   const {
   //   // isAuthenticated,
@@ -49,49 +49,45 @@ const Loan = (props) => {
           console.log("Success on React Server");
           setLoanInfo(res.data.data);
           console.log(res.data.data);
-        } 
-        else if(res.data.state === 204){
+        } else if (res.data.state === 204) {
           // setLoanInfo(res.data.data);
           console.log("대출 신청 내역이 없습니다");
           setLoanInfo(res.data.data);
           console.log(res.data.data);
-        }
-        else {
+        } else {
           console.log("토큰 유효기간이 끝났을 겁니당~");
         }
       });
   }, []);
 
-
   return (
     <RootLayout header={true}>
       <Header left="back" title="대출 내역" right="blank" />
       {loanInfo && loanInfo.userType === "Parent" ? (
-      loanInfo.loanName && loanInfo.loanAmount && loanInfo.loanMessage ? (
-        <ParentExistApply
-          loanName={loanInfo.loanName}
-          loanAmount={loanInfo.loanAmount}
-          loanMessage={loanInfo.loanMessage}
-        />
-      ) : (
+        loanInfo.loanName && loanInfo.loanAmount && loanInfo.loanMessage ? (
+          <ParentExistApply
+            loanName={loanInfo.loanName}
+            loanAmount={loanInfo.loanAmount}
+            loanMessage={loanInfo.loanMessage}
+          />
+        ) : (
+          <ParentEmptyApply />
+        )
+      ) : loanInfo && loanInfo.userType === "Child" ? (
+        loanInfo.loanName && loanInfo.loanAmount && loanInfo.loanMessage ? (
+          <ChildExistApply
+            loanName={loanInfo.loanName}
+            loanAmount={loanInfo.loanAmount}
+            loanMessage={loanInfo.loanMessage}
+          />
+        ) : (
+          <ChildEmptyApply />
+        )
+      ) : userType === "Parent" ? (
         <ParentEmptyApply />
-      )
-    ) : loanInfo && loanInfo.userType === "Child" ? (
-      loanInfo.loanName && loanInfo.loanAmount && loanInfo.loanMessage ? (
-        <ChildExistApply
-          loanName={loanInfo.loanName}
-          loanAmount={loanInfo.loanAmount}
-          loanMessage={loanInfo.loanMessage}
-        />
       ) : (
         <ChildEmptyApply />
-      )
-    ) : userType === "Parent" ? (
-      <ParentEmptyApply />
-    ) : (
-      <ChildEmptyApply />
-    )}
-
+      )}
 
       <Section title="최근 거래내역" seeMore={true} seeMoreText="전체 거래내역">
         <TransactionBox>
