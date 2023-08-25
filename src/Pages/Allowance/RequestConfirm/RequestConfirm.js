@@ -1,38 +1,54 @@
 import classes from "./RequestConfirm.module.css";
 import LoveLetter from "../../../assets/love-letter.png";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Header from "../../../components/Layout/Header";
 import Button2 from "../../../components/Button/Button2";
 import InputBox from "../../../components/Input/InputBox";
-import Footer from "../../../components/Layout/Footer";
 import { useLocation, useNavigate } from "react-router-dom";
 import LocaleStringToNumber from "../../../util/LocaleStringToNumber";
-import axios from "axios";
 import RootLayout from "../../../components/Layout/RootLayout";
+import { fetchRequestAllowance } from "../../../apis/requests";
 
-const AskSend = (props) => {
+const AskSend = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [allowSendRequest, setAllowSendRequest] = useState(false);
   const [message, setMessage] = useState("");
   const [values, setValues] = useState({
-    id: location.state.id,
-    amount: LocaleStringToNumber(location.state.amount),
-    message: message,
+    parentId: location.state.userId,
+    allowanceAmount: LocaleStringToNumber(location.state.amount),
+    requestDescription: message,
   });
   const onChangeHandler = (event) => {
     setMessage(event.target.value);
   };
 
-  const onClickHandler = (event) => {
+  async function requestAllowance() {
+    try {
+      const response = await fetchRequestAllowance(values);
+      return response;
+    } catch (error) {
+      console.error("requestAllowance 실패", error);
+    }
+  }
+
+  const onClickHandler = async (event) => {
     event.preventDefault();
-    setValues((prevValues) => ({ ...prevValues, message: message }));
+    setValues((prevValues) => ({ ...prevValues, requestDescription: message }));
     setAllowSendRequest(true);
+
+    const response = await requestAllowance();
+    if (response.data.state === 200) {
+      alert("용돈 조르기 요청에 성공했습니다.");
+    } else {
+      alert("용돈 조르기 요청에 실패했습니다.");
+    }
+
+    navigate("/allowance/history");
   };
 
   useEffect(() => {
     if (allowSendRequest) {
-      axios.defaults.withCredentials = true;
       navigate("/allowance/request/end", {
         state: { name: location.state.name, amount: location.state.amount },
       });
@@ -54,10 +70,13 @@ const AskSend = (props) => {
             <div className={classes.imageBox}>
               <img src={LoveLetter} alt="love-letter" />
             </div>
-            <InputBox placeholder="하고 싶은 말을 적어봐요!" onChange={onChangeHandler} />
+            <InputBox
+              placeholder="하고 싶은 말을 적어봐요!"
+              onChange={onChangeHandler}
+            />
           </div>
         </div>
-        <Button2 onClick={onClickHandler}>조르기 20번 남았어요</Button2>
+        <Button2 onClick={onClickHandler}>용돈 조르기</Button2>
       </section>
     </RootLayout>
   );

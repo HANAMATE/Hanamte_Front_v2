@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { useEffect, useState } from "react";
 
 import Header from "../../../components/Layout/Header";
 import Section from "../../../components/Card/Section";
@@ -7,7 +7,9 @@ import AllowanceAskCard from "../../../components/Card/AllowanceAskCard";
 
 import classes from "./History.module.css";
 import RootLayout from "../../../components/Layout/RootLayout";
+import { getRequestHistoryChild } from "../../../apis/requests";
 
+/*
 const DUMMY_HISTORY = [
   {
     id: 1,
@@ -35,16 +37,36 @@ const DUMMY_HISTORY = [
     amount: "24500",
   },
 ];
+*/
 
-const History = (props) => {
+const History = () => {
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    async function getRequestHistory() {
+      try {
+        const response = await getRequestHistoryChild();
+        setHistory(response.data.data);
+      } catch (error) {
+        console.error("requestAllowance 실패", error);
+      }
+    }
+
+    getRequestHistory();
+  }, []);
+
   return (
     <RootLayout header={true}>
       <Header left="back" title="용돈 조회" right="blank" />
       <Section title="기다리는 중" seeMore={true} seeMoreText="지난 용돈">
         <div className={classes.cardContainer}>
-          <AllowanceAskCard remainingTime="18" />
-          {DUMMY_HISTORY.map((each) => (
-            <AllowanceHistoryCard key={each.id} name={each.name} amount={each.amount} />
+          <AllowanceAskCard remainingTime="19" />
+          {history.map((each) => (
+            <AllowanceHistoryCard
+              key={each.requestId}
+              name={each.targetId}
+              amount={each.allowanceAmount}
+            />
           ))}
         </div>
       </Section>

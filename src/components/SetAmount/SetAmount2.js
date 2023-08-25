@@ -1,14 +1,12 @@
 import { Fragment, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { AiOutlineArrowLeft } from "react-icons/ai";
 
 import Header from "../Layout/Header";
 import Button1 from "../Button/Button1";
 import classes from "./SetAmount.module.css";
-import { fetchPostAccount } from "../../apis/requests";
+import LocaleString from "../../util/LocaleString";
 
-const SetAmount = (props) => {
-  const navigate = useNavigate();
+const SetAmount2 = (props) => {
   const [amount, setAmount] = useState("0");
 
   const plusMath = (number) => {
@@ -28,22 +26,9 @@ const SetAmount = (props) => {
   const deleteNumber = () => {
     setAmount((prevPhoneNumber) => prevPhoneNumber.slice(0, -1));
   };
-  async function postAccount() {
-    try {
-      const response = await fetchPostAccount({ amount: amount });
-      return response;
-    } catch (error) {
-      console.error("postAccount 실패", error);
-    }
-  }
+
   const onClickHandler = async () => {
-    const res = await postAccount();
-    if (res.data.state === 200) {
-      alert("가져오기 성공했습니다.");
-    } else {
-      alert("가져오기 실패했습니다.");
-    }
-    navigate("/allowance");
+    props.submitAmount(LocaleString(amount));
   };
 
   return (
@@ -97,4 +82,4 @@ const SetAmount = (props) => {
   );
 };
 
-export default SetAmount;
+export default SetAmount2;

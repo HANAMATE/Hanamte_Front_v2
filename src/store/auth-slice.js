@@ -10,6 +10,7 @@ const authSlice = createSlice({
     userType: undefined,
     accessToken: "",
     refreshToken: "",
+    accountBalance: "",
   },
   reducers: {
     login(state, action) {
@@ -30,6 +31,9 @@ const authSlice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
     },
+    setAccountBalance(state, action) {
+      state.accountBalance = action.payload.accountBalance;
+    },
     logout(state) {
       state.isAuthenticated = false;
       state.loginId = "";
@@ -38,6 +42,7 @@ const authSlice = createSlice({
       state.userType = undefined;
       state.accessToken = "";
       state.refreshToken = "";
+      state.accountBalance = "";
     },
   },
 });
