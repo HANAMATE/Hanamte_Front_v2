@@ -65,7 +65,7 @@ const ApplyForm = (props) => {
   const [loanInfo, setLoanInfo] = useState(null);
   const [dummy, setDummy] = useState([]);
   const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MyIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMwMzUwNTN9.0YwaoEheTplEXs48vUqqKuxq_F9euvCS59D6qHy_a9Y";
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MyIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMxNTE1NjV9.PafqBDIg7GLZqP0lA0X6varl382fPXUWsZGRtQshg34";
   // const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
 
   useEffect(() => {
@@ -146,6 +146,7 @@ const ApplyForm = (props) => {
         setTotalInterestRate(total_interestRate);
         setTotalRepaymentAmount(total_repaymentAmount);
         setIsCalError(false);
+
         // setCalculatedAmount(response.data.data);
       })
       .catch((error) => {
@@ -173,6 +174,7 @@ const ApplyForm = (props) => {
       total_interestRate, // GET으로 가져온 값
       total_repaymentAmount, // GET으로 가져온 값
       sequence: selectedDuration, // 선택된 상환 기간
+      balance: total_repaymentAmount,
     };
 
     axios
@@ -198,6 +200,7 @@ const ApplyForm = (props) => {
   const [repaymentList, setRepaymentList] = useState([]);
   const [total_interestRate, setTotalInterestRate] = useState(0);
   const [total_repaymentAmount, setTotalRepaymentAmount] = useState(0);
+  const [balance, setBalance] = useState(0);
   return (
     <RootLayout header={true}>
       <Header left="back" title="대출 신청" right="blank" />
