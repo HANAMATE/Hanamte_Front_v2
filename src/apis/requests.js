@@ -92,3 +92,22 @@ export const getRequestHistoryChild = async () => {
     throw error;
   }
 };
+
+export const getRequestMyMoimList = async () => {
+  try{
+    const response = await api.get("/moims");
+    return response;
+  }catch(error){
+    throw error;
+  }
+};
+
+
+export const getRequestMyMoim = async (walletId) => {
+  try {
+    const response = await api.get(`/moim/${walletId}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

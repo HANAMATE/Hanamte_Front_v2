@@ -16,9 +16,10 @@ import Allowance from "./Pages/Allowance/Allowance";
 import Fill from "./Pages/Allowance/Fill/Fill";
 import RequestSet from "./Pages/Allowance/ReqeustSet/RequestSet";
 import RequestEnd from "./Pages/Allowance/RequestEnd/RequestEnd";
-import CommunityAccount from "./Pages/Community/Account/CommunityAccount";
+import CommunityAccount from "./Pages/Community/Account/CommunityAccount2";
 import ArticleDetail from "./Pages/Community/ArticleDetail";
 import Success from "./Pages/Allowance/Success/Success";
+import Moim from "./Pages/Moim/Moim"
 // import Error from "./Pages/Error/Error";
 
 const router = createBrowserRouter([
@@ -60,6 +61,7 @@ const router = createBrowserRouter([
   },
   { path: "community", element: <CommunityAccount /> },
   { path: "article", element: <ArticleDetail /> },
+  { path: "moim", element: <Moim /> },
 ]);
 
 const App = () => {

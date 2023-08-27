@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment ,useState, useEffect} from "react";
 import classes from "./CommunityAccount.module.css";
 import Header from "../../../components/Layout/Header";
 import CommunityLayout from "../../../components/Layout/CommunityLayout";
@@ -23,6 +23,7 @@ import CommunityHeader from "../../../components/Layout/CommunityHeader";
 import Section from "../../../components/Card/Section";
 import Wallet from "../../../components/Card/Wallet";
 import Account from "../Account";
+import {getRequestMyMoim} from "../../../../src/apis/requests";
 
 const DUMMY_ARTICLE = [
   // DUMMY00,
@@ -43,19 +44,46 @@ const DUMMY_ARTICLE = [
 const CommunityAccount = (props) => {
   const location = useLocation();
   const { walletId } = location.state; // walletId 값을 받아옴
-  console.log("월렛 아이디 = " +walletId);
+  const [moim, setMoim] = useState([]);
+  const [transactions, setTransactions] = useState([]);
+
+  async function getMyMoim(walletId) {
+    try {
+        const response = await getRequestMyMoim(walletId);
+        console.log("getMyMoim 실행 walletID = " + walletId)
+        if (response.data.data !== []) {
+          setMoim(response.data.data);
+          setTransactions(response.data.data.transactionList)
+          console.log(moim)
+          console.log(transactions)
+        }
+      } catch (error) {
+        console.error("getMyMoim 실패", error);
+      }finally{
+        console.log(moim)
+      }
+    }
+    useEffect(()=>{
+      getMyMoim(walletId);
+    }, []);
+
+
   return (
     <CommunityLayout>
-      <Header left="back" title="여름방학 속초 🏖️" right="blank" />
+      <Header left="back" title={moim.walletName} right="blank" />
       <div className={classes.container}>
         {/* <div className={classes.walletBox}>
-          <Wallet color="blue" />
+          <Wallet color="blue" />s
         </div> */}
-        <Account />
+        <Account moim={moim} />
         <Section community={true} title="모임일기" seeMore={true} seeMoreText="거래내역 전체보기">
-          {DUMMY_ARTICLE.map((each) => {
-            return <Article key={each} image={each} />;
-          })}
+          {transactions.map((each) => {
+            return (
+            <div /*style={{margin :'10px 0'}}*/>
+              <Article key={each.id} image={each} transaction={each} />
+            </div>
+            );
+          })} 
         </Section>
         <section className={classes.articleSection}></section>
       </div>

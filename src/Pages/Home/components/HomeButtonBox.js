@@ -19,6 +19,9 @@ const HomeButtonBox = (props) => {
   const jointClickHandler = () => {
     navigate("community");
   };
+  const myMoimClickHandler = () => {
+    navigate("moim"); // 이동하고자 하는 페이지의 경로를 넣어줍니다.
+  };
 
   return (
     <div className={classes.container}>
@@ -50,6 +53,13 @@ const HomeButtonBox = (props) => {
           title="친구들과"
           subTitle="다 함께!"
           onClick={jointClickHandler}
+        />
+        <HomeButton
+          background="var(--red1)"
+          icon={<BsFillPeopleFill size="32" />}
+          title="모임통장 리스트"
+          subTitle="보러가기"
+          onClick={myMoimClickHandler}
         />
       </div>
     </div>

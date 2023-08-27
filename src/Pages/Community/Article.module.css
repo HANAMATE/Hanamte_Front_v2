@@ -1,7 +1,7 @@
 .container {
   width: 100%;
   border-top: 1px solid #bdbdbd;
-  padding: 10px 0 20px 0;
+  padding: 0 0 20px 0;
 }
 .titleBox {
   width: 100%;
@@ -42,6 +42,9 @@
 }
 .image {
   width: 100%;
+  display: block; /* 블록 요소로 변경 */
+  text-align: center; /* 텍스트 수평 가운데 정렬 */
+  /* margin: 0 auto; */
 }
 .replyBox {
   padding: 15px 15px 15px 15px;
