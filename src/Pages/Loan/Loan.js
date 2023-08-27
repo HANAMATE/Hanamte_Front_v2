@@ -11,7 +11,7 @@ import ChildExistApply from "../../components/Card/ChildExistApply";
 
 import Section from "../../components/Card/Section";
 import TransactionBox from "../../components/Card/TransactionBox";
-import Transaction from "../../components/Card/Transaction";
+import TransactionLoan from "../../components/Card/TransactionLoan";
 import axios from "axios";
 
 import Button2 from "../../components/Button/Button2";
@@ -20,9 +20,10 @@ import ApproveBtn from "../../components/Button/ApproveBtn";
 
 const Loan = (props) => {
   const [loanInfo, setLoanInfo] = useState(null);
+  const [historyInfo, setHistoryInfo] = useState([]);
   const [dummy, setDummy] = useState([]);
   const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMxNDA5MjN9.10lp79GcuNHa9yaL3KyYPry4upCJRIpVykPvUy5CZBQ";
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0NCIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMyMzI5MjV9.sNpfSQCRvYaSPu7OANK2ZmrCf5GkWHH2yG2Car33iNo";
   const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
 
   //   const {
@@ -34,6 +35,21 @@ const Loan = (props) => {
   //   // accessToken,
   //   // loginId,
   // } = useSelector((state) => state.auth);
+
+
+  const formatDate = (date) => {
+    if (!date) {
+      return "진행 중인 대출";
+    }
+  
+    const formattedDate = new Date(date).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "2-digit",
+      day: "2-digit"
+    });
+    return formattedDate;
+  };
+
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
@@ -57,6 +73,20 @@ const Loan = (props) => {
         } else {
           console.log("토큰 유효기간이 끝났을 겁니당~");
           // setLoanInfo(res.data.data);
+        }
+      });
+
+      axios
+      .get(process.env.REACT_APP_SERVER_URL + "/loan/historyInfo", {
+        headers: {
+          Authorization: accessToken,
+        },
+      })
+      .then((res) => {
+        if (res.data.state === 200) {
+          setHistoryInfo(res.data.data);
+        } else {
+          console.log("토큰 유효기간이 끝났을 겁니다.");
         }
       });
   }, []);
@@ -92,20 +122,21 @@ const Loan = (props) => {
         <ChildEmptyApply />
       )}
 
-      <Section title="최근 거래내역" seeMore={true} seeMoreText="전체 거래내역">
-        <TransactionBox>
-          {dummy.map((each) => (
-            <Transaction
-              key={each.id}
-              date={each.date}
-              title={each.type}
-              subTitle={each.type}
-              type={each.type}
-              change={each.amount}
-              remain={each.walltId}
-            />
-          ))}
-        </TransactionBox>
+      <Section title="최근 대출내역" seeMore={true} seeMoreText="각 내역 선택 -> 상세내역 이동">
+      <TransactionBox>
+  {historyInfo && historyInfo.length > 0 ? (
+    historyInfo.map((transaction, index) => (
+      <TransactionLoan
+        dateBox={index}
+        title={`${transaction.loanName}`}
+        change={`금액: ${transaction.loanAmount}원`}
+        subTitle={`End Date: ${formatDate(transaction.endDate)}`}
+      />
+    ))
+  ) : (
+    <p>거래 내역이 없습니다.</p>
+  )}
+</TransactionBox>
       </Section>
     </RootLayout>
   );
