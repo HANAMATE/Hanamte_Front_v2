@@ -12,7 +12,7 @@ import { Carousel } from "react-responsive-carousel"; //캐로젤 추가
 import "react-responsive-carousel/lib/styles/carousel.min.css"; //캐로젤 추가
 import classes from "./Article.module.css";
 import CommentBox from "../../components/CommentBox";
-
+import DropDown from "../../components/DropDown";
 const Article = (props) => {
   const date = new Date(props.transaction.date);
   const options = {
@@ -30,7 +30,6 @@ const Article = (props) => {
     <div className={classes.container}>
       <div className={classes.titleBox}>
         <div className={classes.left}>
-          {/* <PiFinnTheHumanDuotone size="24" /> */}
           <div className={classes.textBox}>
             <p className={classes.title}>
               {props.transaction.transactionMessage || "Nan"}
@@ -44,7 +43,7 @@ const Article = (props) => {
           </div>
         </div>
         <div className={classes.right}>
-          <PiDotsThreeBold size="24" />
+          {<DropDown article={props.transaction.article}></DropDown>}
         </div>
       </div>
       {props.transaction.article !== null ? (
@@ -74,7 +73,6 @@ const Article = (props) => {
               <p>{props.transaction.article.content}</p>
             </div>
           </div>
-          {/* {console.log{}} */}
           <CommentBox comment = {props.transaction.article.commentList} articleId = {props.transaction.article.articleId}/>
         </div>
       ) : null}
