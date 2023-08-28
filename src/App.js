@@ -20,6 +20,8 @@ import CommunityAccount from "./Pages/Community/Account/CommunityAccount";
 import ArticleDetail from "./Pages/Community/ArticleDetail";
 import Success from "./Pages/Allowance/Success/Success";
 import AllowanceParent from "./Pages/Allowance/Parent/AllowanceParent";
+import Send from "./Pages/Allowance/Send/AllowanceSend";
+import SendWho from "./Pages/Allowance/SendWho/SendWho";
 // import Error from "./Pages/Error/Error";
 
 const router = createBrowserRouter([
@@ -49,6 +51,13 @@ const router = createBrowserRouter([
           },
           { path: "parent", element: <AllowanceParent /> },
           { path: "history", element: <History /> },
+          {
+            path: "send",
+            children: [
+              { index: true, element: <SendWho /> },
+              { path: "set", element: <Send /> },
+            ],
+          },
           {
             path: "fill",
             children: [

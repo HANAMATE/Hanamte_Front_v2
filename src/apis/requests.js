@@ -110,3 +110,21 @@ export const fetchApprove = async (postData) => {
     throw error;
   }
 };
+
+export const fetchGetChild = async (postData) => {
+  try {
+    const response = await api.post("/parent/my-child", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchSendAllowance = async (postData) => {
+  try {
+    const response = await api.post("/allowance/send", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

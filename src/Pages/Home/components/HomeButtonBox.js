@@ -19,6 +19,9 @@ const HomeButtonBox = (props) => {
   const jointClickHandler = () => {
     navigate("community");
   };
+  const sendClickHandler = () => {
+    navigate("/allowance/send");
+  };
 
   return (
     <div className={classes.container}>
@@ -50,6 +53,13 @@ const HomeButtonBox = (props) => {
           title="친구들과"
           subTitle="다 함께!"
           onClick={jointClickHandler}
+        />
+        <HomeButton
+          background="var(--red2)"
+          icon={<BsFillPeopleFill size="32" />}
+          title="내 아이에게"
+          subTitle="용돈주기"
+          onClick={sendClickHandler}
         />
       </div>
     </div>
