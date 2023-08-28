@@ -2,7 +2,7 @@ import { Fragment ,useState, useEffect} from "react";
 import classes from "./CommunityAccount.module.css";
 import Header from "../../../components/Layout/Header";
 import CommunityLayout from "../../../components/Layout/CommunityLayout";
-import { useLocation } from "react-router-dom"; // useLocation 추가
+import { useLocation, useNavigate } from "react-router-dom"; // useLocation 추가
 
 import Wave from "../../../assets/wave-colored.png";
 import DUMMY00 from "../../../assets/DUMMY01.jpeg";
@@ -54,18 +54,19 @@ const CommunityAccount = (props) => {
         if (response.data.data !== []) {
           setMoim(response.data.data);
           setTransactions(response.data.data.transactionList)
-          console.log(moim)
-          console.log(transactions)
+          await console.log(moim)
+          await console.log(transactions)
         }
       } catch (error) {
         console.error("getMyMoim 실패", error);
       }finally{
-        console.log(moim)
+        await console.log(moim)
       }
     }
     useEffect(()=>{
       getMyMoim(walletId);
     }, []);
+
 
 
   return (
@@ -77,10 +78,10 @@ const CommunityAccount = (props) => {
         </div> */}
         <Account moim={moim} />
         <Section community={true} title="모임일기" seeMore={true} seeMoreText="거래내역 전체보기">
-          {transactions.map((each) => {
+          {transactions.map((transaction) => {
             return (
             <div /*style={{margin :'10px 0'}}*/>
-              <Article key={each.id} image={each} transaction={each} />
+              <Article key={transaction.id} image={transaction} transaction={transaction} walletId={transaction.walletId}/>
             </div>
             );
           })} 

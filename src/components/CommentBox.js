@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Comment from "./Comment";
 import classes from "./CommentBox.module.css";
 import CommentNew from "./CommentNew";
-
+import {getArticleDetail} from "../../src/apis/requests";
 function getTimeDifferenceString(timestamp) {
   const now = new Date();
   const targetTime = new Date(timestamp);
@@ -25,30 +25,50 @@ function getTimeDifferenceString(timestamp) {
   }
 }
 const CommentBox = (props) => {
-  const DUMMY = props.comment;
-  const moreThanThree = DUMMY.length > 3;
+  // let DUMMY = props.comment;
   const [showAllComments, setShowAllComments] = useState(false);
-
+  const [comments, setComments] = useState(props.comment); // 댓글 목록 상태 추가
+  const moreThanThree = comments.length > 3;
   const clickSeeMoreHandler = () => {
     setShowAllComments(!showAllComments);
   };
 
+  async function onCommentSubmit(){
+    try {
+      const response = await getArticleDetail({articleId: props.articleId}); // 서버로부터 업데이트된 댓글 목록을 받아옴
+      console.log(props.articleId)
+      const updatedComments = response.data.data.commentList; // 업데이트된 댓글 목록
+      // props.comment = updatedComments;
+      console.log("onCommentSubmit 호출")
+      console.log(response)
+      setComments(updatedComments);
+      if(updatedComments.length>3){
+        moreThanThree = true;
+      }
+      // this.forceUpdate();
+    } catch (error) {
+      console.error("댓글 추가 후 재랜더링 실패", error);
+    }
+  };
+
   return (
     <div className={classes.container}>
-      {DUMMY.slice(0, 3).map((each) => (
-        <Comment key={each.id} image={each.image} name={each.writerName} date={getTimeDifferenceString(each.createDate)} content={each.commentContent} />
+      {comments.slice(0, 3).map((each) => (
+        <Comment key={each.commentId} image={each.image} name={each.writerName} date={getTimeDifferenceString(each.createDate)} content={each.commentContent} />
       ))}
       {showAllComments &&
-        DUMMY.slice(3).map((each) => (
-          <Comment key={each.id} image={each.image} name={each.writerName} date={getTimeDifferenceString(each.createDate)} content={each.commentContent} />
+        comments.slice(3).map((each) => (
+          <Comment key={each.commentId} image={each.image} name={each.writerName} date={getTimeDifferenceString(each.createDate)} content={each.commentContent} />
         ))}
-      {moreThanThree && (
+      {comments.length > 3 && (
         <button className={classes.seeMore} onClick={clickSeeMoreHandler}>
           {showAllComments ? "댓글 닫기" : "댓글 전체보기"}
         </button>
       )}
-      <CommentNew />
-    </div>
+      <CommentNew
+        articleId={props.articleId}
+        onCommentSubmit ={onCommentSubmit}
+      />    </div>
   );
 };
 

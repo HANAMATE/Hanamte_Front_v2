@@ -111,3 +111,21 @@ export const getRequestMyMoim = async (walletId) => {
     throw error;
   }
 };
+
+export const fetchWriteComment = async(commentInfo) =>{
+  try {
+    const response = await api.post(`/moim/sns/article/comment`,commentInfo);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const getArticleDetail = async(articleId) =>{
+  try {
+    const response = await api.post(`/moim/sns/article/detail`,articleId);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

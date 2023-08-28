@@ -73,16 +73,9 @@ const Article = (props) => {
             <div className={classes.replyHeader}>
               <p>{props.transaction.article.content}</p>
             </div>
-            {/* <div className={classes.reply}>
-              <p className={classes.name}>{props.transaction.article.comment}</p>
-              <p className={classes.content}>이영지 뷔스s티에 보라색양말 내꺼</p>
-            </div>
-            <div className={classes.reply}>
-              <p className={classes.name}>happy._.ej</p>
-              <p className={classes.content}>김미미 악세사리 다 내꺼내꺼</p>
-            </div> */}
           </div>
-          <CommentBox comment = {props.transaction.article.commentList}/>
+          {/* {console.log{}} */}
+          <CommentBox comment = {props.transaction.article.commentList} articleId = {props.transaction.article.articleId}/>
         </div>
       ) : null}
     </div>
