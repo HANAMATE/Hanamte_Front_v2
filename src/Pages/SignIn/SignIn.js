@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 
 import { authActions } from "../../store/auth-slice";
 import useInput from "../../hooks/use-input";
@@ -10,6 +9,9 @@ import Button1 from "../../components/Button/Button1";
 import Input from "../../components/Input/Input";
 import classes from "./SignIn.module.css";
 import RootLayout from "../../components/Layout/RootLayout";
+import { fetchLogin } from "../../apis/requests";
+import axios from "axios";
+import { updateAuthorizationHeader } from "../../apis/api";
 
 const validateID = (id) => {
   return /^[a-z0-9_-]{5,20}$/.test(id);
@@ -51,38 +53,35 @@ const SignIn = () => {
     setAllowSendRequest(true);
   };
 
+  async function login() {
+    try {
+      const response = await fetchLogin(values);
+      localStorage.removeItem("AccessToken");
+      localStorage.removeItem("RefreshToken");
+      localStorage.setItem("AccessToken", response.headers["authorization"]);
+      localStorage.setItem("RefreshToken", response.headers["x-refresh-token"]);
+      updateAuthorizationHeader();
+      dispatch(
+        authActions.login({
+          loginId: response.data.data.userId,
+          name: response.data.data.userId,
+          accessToken: response.headers["authorization"],
+          refreshToken: response.headers["x-refresh-token"],
+        })
+      );
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setAllowSendRequest(false);
+    }
+  }
+
   useEffect(() => {
     if (allowSendRequest) {
-      axios.defaults.withCredentials = true;
-      axios.defaults.headers.post["Content-Type"] = "application/json";
-      axios
-        .post(process.env.REACT_APP_SERVER_URL + "/users/login", values)
-        // .post("https://hanamate.onrender.com/signin", values)
-        .then((res) => {
-          // console.log(res.headers["authorization"]);
-          // console.log(res.headers["x-refresh-token"]);
-          if (res.data.state === 200) {
-            console.log("Success on React Server");
-            dispatch(
-              authActions.login({
-                loginId: res.data.data.userId,
-                name: res.data.data.userId,
-                accessToken: res.headers["authorization"],
-                refreshToken: res.headers["x-refresh-token"],
-              })
-            );
-          }
-
-          navigate("/");
-          // } else {
-          //   setAllowSendRequest(false);
-          //   setIsError(true);
-          // }
-        })
-        .catch((err) => console.log(err))
-        .finally(() => setAllowSendRequest(false));
+      login();
     }
-  }, [values, allowSendRequest, formIsValid, navigate, dispatch]);
+  }, [allowSendRequest]);
 
   return (
     <RootLayout>
@@ -116,8 +115,8 @@ const SignIn = () => {
           )}
           <Button1 type="submit">로그인</Button1>
           <div className={classes.helperContainer}>
-            <Link to="/help/idInquiry">아이디 찾기</Link>
-            <Link to="/help/pwInquiry">비밀번호 찾기</Link>
+            {/* <Link to="/help/idInquiry">아이디 찾기</Link>
+            <Link to="/help/pwInquiry">비밀번호 찾기</Link> */}
             <Link to="/join">회원가입</Link>
           </div>
         </form>

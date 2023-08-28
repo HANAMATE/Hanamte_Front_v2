@@ -2,15 +2,60 @@ import { useNavigate } from "react-router-dom";
 import { RiInformationFill } from "react-icons/ri";
 import { FaWallet, FaPercentage, FaCoins, FaMoneyCheck } from "react-icons/fa";
 import classes from "./Wallet.module.css";
+import { fetchBalance, getMyAccount } from "../../apis/requests";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "../../store/auth-slice";
+import { useEffect } from "react";
 
 const Wallet = (props) => {
+  const { loginId } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const walletClickHandler = () => {
     navigate("history");
   };
-  const fillClickHandler = () => {
-    navigate("fill");
+
+  async function getAccountInfo() {
+    try {
+      const response = await getMyAccount();
+      if (response.data.state === 200) {
+        dispatch(
+          authActions.setAccountBalance({
+            accountBalance: response.data.data.balance,
+          })
+        );
+      }
+      return response;
+    } catch (error) {
+      console.error("getBalance 실패", error);
+    }
+  }
+
+  const fillClickHandler = async () => {
+    const response = await getAccountInfo();
+
+    if (response.data.state === 200) {
+      navigate("fill");
+    } else {
+      alert("연결된 계좌가 없습니다.");
+    }
   };
+
+  useEffect(() => {
+    async function getbalance() {
+      try {
+        const response = await fetchBalance({ userId: loginId });
+        dispatch(
+          authActions.setBalance({
+            balance: response.data.data.balance,
+          })
+        );
+      } catch (error) {
+        console.error("getBalance 실패", error);
+      }
+    }
+    getbalance();
+  }, []);
 
   let walletColor = "";
   switch (props.color) {
@@ -38,7 +83,9 @@ const Wallet = (props) => {
       <div className={classes.firstRow}>
         <div className={classes.titleBox}>
           <p className={classes.subTitle}>남은 용돈</p>
-          <p className={classes.title}>{Number(props.balance).toLocaleString()}원</p>
+          <p className={classes.title}>
+            {Number(props.balance).toLocaleString()}원
+          </p>
         </div>
         <div className={classes.iconBox}>
           <RiInformationFill fill="#f9f9f9" />
