@@ -49,10 +49,13 @@ const Article = (props) => {
       </div>
       {props.transaction.article !== null ? (
           <div className={classes.container}>
-          <Carousel showThumbs={false}>
+            <Carousel
+              showThumbs={false}
+              className={classes.carouselContainer}
+            >
             {props.transaction.article.imageUrl !== null ? (
               props.transaction.article.imageUrl.map((image, index) => (
-                <div key={index}>
+                <div key={index} >
                   <img className={classes.image} src={image} alt={`Image ${index + 1}`}/>
                 </div>
               ))
@@ -68,18 +71,18 @@ const Article = (props) => {
               <MdBookmarkBorder size="24" />
             </div>
             <div className={classes.replyHeader}>
-              <p>시럽은 신중하게 뿌리는 편 🥞</p>
+              <p>{props.transaction.article.content}</p>
             </div>
-            <div className={classes.reply}>
-              <p className={classes.name}>happy._.ej</p>
-              <p className={classes.content}>이영지 뷔스티에 보라색양말 내꺼</p>
+            {/* <div className={classes.reply}>
+              <p className={classes.name}>{props.transaction.article.comment}</p>
+              <p className={classes.content}>이영지 뷔스s티에 보라색양말 내꺼</p>
             </div>
             <div className={classes.reply}>
               <p className={classes.name}>happy._.ej</p>
               <p className={classes.content}>김미미 악세사리 다 내꺼내꺼</p>
-            </div>
+            </div> */}
           </div>
-          <CommentBox />
+          <CommentBox comment = {props.transaction.article.commentList}/>
         </div>
       ) : null}
     </div>
