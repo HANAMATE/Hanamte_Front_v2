@@ -92,3 +92,21 @@ export const getRequestHistoryChild = async () => {
     throw error;
   }
 };
+
+export const getRequestHistoryParent = async () => {
+  try {
+    const response = await api.get("/allowance/parent/pending");
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchApprove = async (postData) => {
+  try {
+    const response = await api.put("/allowance/parent", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
