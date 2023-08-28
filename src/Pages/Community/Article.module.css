@@ -80,3 +80,20 @@
   font-size: 0.9rem;
   font-weight: 500;
 }
+
+.carouselContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centeredImageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centeredImageWrapper img {
+  max-width: 100%;
+  max-height: 100%;
+}
