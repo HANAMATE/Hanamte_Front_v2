@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import RootLayout from "../../components/Layout/RootLayout";
 import Header from "../../components/Layout/Header";
@@ -23,7 +24,7 @@ const Loan = (props) => {
   const [historyInfo, setHistoryInfo] = useState([]);
   const [dummy, setDummy] = useState([]);
   const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0NCIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMyMzI5MjV9.sNpfSQCRvYaSPu7OANK2ZmrCf5GkWHH2yG2Car33iNo";
+    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMyODc5Mzh9.eJruGKBTLzXINYOAVmaMEd8-HQME5zBUvPlAas8Y3yg";
   const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
 
   //   const {
@@ -36,20 +37,18 @@ const Loan = (props) => {
   //   // loginId,
   // } = useSelector((state) => state.auth);
 
-
   const formatDate = (date) => {
     if (!date) {
       return "진행 중인 대출";
     }
-  
+
     const formattedDate = new Date(date).toLocaleDateString("en-US", {
       year: "numeric",
       month: "2-digit",
-      day: "2-digit"
+      day: "2-digit",
     });
     return formattedDate;
   };
-
 
   useEffect(() => {
     axios.defaults.withCredentials = true;
@@ -76,7 +75,7 @@ const Loan = (props) => {
         }
       });
 
-      axios
+    axios
       .get(process.env.REACT_APP_SERVER_URL + "/loan/historyInfo", {
         headers: {
           Authorization: accessToken,
@@ -90,6 +89,13 @@ const Loan = (props) => {
         }
       });
   }, []);
+
+  const navigate = useNavigate(); // useNavigate로 변경
+
+  const handleTransactionClick = (transaction) => {
+    console.log("리스트 클릭됨");
+    navigate(`/loan/loanHistory/${transaction.loanId}`);
+  };
 
   return (
     <RootLayout header={true}>
@@ -122,21 +128,27 @@ const Loan = (props) => {
         <ChildEmptyApply />
       )}
 
-      <Section title="최근 대출내역" seeMore={true} seeMoreText="각 내역 선택 -> 상세내역 이동">
-      <TransactionBox>
-  {historyInfo && historyInfo.length > 0 ? (
-    historyInfo.map((transaction, index) => (
-      <TransactionLoan
-        dateBox={index}
-        title={`${transaction.loanName}`}
-        change={`금액: ${transaction.loanAmount}원`}
-        subTitle={`End Date: ${formatDate(transaction.endDate)}`}
-      />
-    ))
-  ) : (
-    <p>거래 내역이 없습니다.</p>
-  )}
-</TransactionBox>
+      <Section
+        title="최근 대출내역"
+        seeMore={true}
+        seeMoreText="각 내역 선택 -> 상세내역 이동"
+      >
+        <TransactionBox>
+          {historyInfo && historyInfo.length > 0 ? (
+            historyInfo.map((transaction, index) => (
+              <TransactionLoan
+                key={index}
+                onClick={() => handleTransactionClick(transaction)}
+                dateBox={index + 1}
+                title={`${transaction.loanName}`}
+                change={`금액: ${transaction.loanAmount}원`}
+                subTitle={`End Date: ${formatDate(transaction.endDate)}`}
+              />
+            ))
+          ) : (
+            <p>거래 내역이 없습니다.</p>
+          )}
+        </TransactionBox>
       </Section>
     </RootLayout>
   );
