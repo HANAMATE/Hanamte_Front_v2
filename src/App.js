@@ -18,6 +18,9 @@ import RequestSet from "./Pages/Allowance/ReqeustSet/RequestSet";
 import RequestEnd from "./Pages/Allowance/RequestEnd/RequestEnd";
 import CommunityAccount from "./Pages/Community/Account/CommunityAccount";
 import ArticleDetail from "./Pages/Community/ArticleDetail";
+import Loan from "./Pages/Loan/Loan";
+import LoanHistory from "./Pages/Loan/LoanHistory";
+import ApplyForm from "./Pages/Loan/ApplyForm ";
 import Success from "./Pages/Allowance/Success/Success";
 // import Error from "./Pages/Error/Error";
 
@@ -33,6 +36,15 @@ const router = createBrowserRouter([
       { path: "calendar", element: <Calendar /> },
       { path: "menu", element: <Menu /> },
       { path: "input", element: <SetAmount /> },
+      {
+        path: "loan",
+        children: [
+          { index: true, element: <Loan /> },
+          { path: "loanHistory/:loanId", element: <LoanHistory /> },
+
+          { path: "applyForm", element: <ApplyForm /> },
+        ],
+      },
       {
         path: "allowance",
         children: [

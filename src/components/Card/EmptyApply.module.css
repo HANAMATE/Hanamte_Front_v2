@@ -1,0 +1,72 @@
+.emptyapply {
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 40px;
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.32);
+}
+.violet {
+  background-color: var(--violet2);
+}
+.blue {
+  background-color: var(--blue4);
+}
+.yellow {
+  background-color: var(--yellow2);
+}
+.red1 {
+  background-color: var(--red1);
+}
+.default {
+  background-color: var(--red2);
+}
+/* .default {
+  background-color: var(--violet2);
+} */
+.emptyapply .firstRow {
+  /* display: flex; */
+  justify-content: space-between;
+  /* margin-bottom: 30px; */
+  /* margin-top: 30px; */
+}
+.emptyapply .titleBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.emptyapply .subTitle {
+  color: #f9f9f9;
+  font-weight: 500;
+}
+.emptyapply .title {
+  color: #f9f9f9;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+.emptyapply .secondRow {
+  display: flex;
+  justify-content: space-between;
+  justify-content: center;
+  align-items: center;
+}
+.applyButton {
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  width: 80px;
+  height: 80px;
+}
+.applyButton p {
+  color: #f9f9f9;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+.wallet .thirdRow {
+  display: flex;
+  justify-content: space-between;
+  color: #f9f9f9;
+}
