@@ -188,3 +188,21 @@ export const deleteArticleRequest = async (articleId) => {
     throw error;
   }
 };
+
+export const createMoimWalletRequest = async (postData) => {
+  try {
+    const response = await api.post("/moim", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const moimDepositRequest = async (postData) => {
+  try {
+    const response = await api.post("/moim", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
