@@ -18,10 +18,17 @@ import RequestSet from "./Pages/Allowance/ReqeustSet/RequestSet";
 import RequestEnd from "./Pages/Allowance/RequestEnd/RequestEnd";
 import CommunityAccount from "./Pages/Community/Account/CommunityAccount2";
 import ArticleDetail from "./Pages/Community/ArticleDetail";
+import Loan from "./Pages/Loan/Loan";
+import LoanHistory from "./Pages/Loan/LoanHistory";
+import ApplyForm from "./Pages/Loan/ApplyForm ";
 import Success from "./Pages/Allowance/Success/Success";
 import Moim from "./Pages/Moim/Moim"
 import ArticleForm from "./Pages/Community/ArticleForm";
 import MoimForm from "./Pages/Moim/MoimForm";
+import AllowanceParent from "./Pages/Allowance/Parent/AllowanceParent";
+import Send from "./Pages/Allowance/Send/AllowanceSend";
+import SendWho from "./Pages/Allowance/SendWho/SendWho";
+import Periodic from "./Pages/Allowance/Periodic/Periodic";
 // import Error from "./Pages/Error/Error";
 
 const router = createBrowserRouter([
@@ -37,6 +44,15 @@ const router = createBrowserRouter([
       { path: "menu", element: <Menu /> },
       { path: "input", element: <SetAmount /> },
       {
+        path: "loan",
+        children: [
+          { index: true, element: <Loan /> },
+          { path: "loanHistory/:loanId", element: <LoanHistory /> },
+
+          { path: "applyForm", element: <ApplyForm /> },
+        ],
+      },
+      {
         path: "allowance",
         children: [
           { index: true, element: <Allowance /> },
@@ -49,7 +65,16 @@ const router = createBrowserRouter([
               { path: "end", element: <RequestEnd /> },
             ],
           },
+          { path: "parent", element: <AllowanceParent /> },
+          { path: "periodic", element: <Periodic /> },
           { path: "history", element: <History /> },
+          {
+            path: "send",
+            children: [
+              { index: true, element: <SendWho /> },
+              { path: "set", element: <Send /> },
+            ],
+          },
           {
             path: "fill",
             children: [

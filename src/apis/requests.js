@@ -94,14 +94,13 @@ export const getRequestHistoryChild = async () => {
 };
 
 export const getRequestMyMoimList = async () => {
-  try{
+  try {
     const response = await api.get("/moims");
     return response;
-  }catch(error){
+  } catch (error) {
     throw error;
   }
 };
-
 
 export const getRequestMyMoim = async (walletId) => {
   try {
@@ -112,27 +111,54 @@ export const getRequestMyMoim = async (walletId) => {
   }
 };
 
-export const fetchWriteComment = async(commentInfo) =>{
+export const getRequestHistoryParent = async () => {
   try {
-    const response = await api.post(`/moim/sns/article/comment`,commentInfo);
+    const response = await api.get("/allowance/parent/pending");
     return response;
   } catch (error) {
     throw error;
   }
-}
+};
 
-export const getArticleDetail = async(articleId) =>{
+export const fetchWriteComment = async (commentInfo) => {
   try {
-    const response = await api.post(`/moim/sns/article/detail`,articleId);
+    const response = await api.post(`/moim/sns/article/comment`, commentInfo);
     return response;
   } catch (error) {
     throw error;
   }
-}
+};
 
-export const writeArticleRequest = async(formData) =>{
+export const fetchApprove = async (postData) => {
   try {
-    const response = await api.post(`/moim/sns/article`,formData,{
+    const response = await api.put("/allowance/parent", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getArticleDetail = async (articleId) => {
+  try {
+    const response = await api.post(`/moim/sns/article/detail`, articleId);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchGetChild = async (postData) => {
+  try {
+    const response = await api.post("/parent/my-child", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const writeArticleRequest = async (formData) => {
+  try {
+    const response = await api.post(`/moim/sns/article`, formData, {
       headers: {
         "Content-Type": "multipart/form-data", // FormData로 전송할 때 content type 설정
       },
@@ -141,15 +167,24 @@ export const writeArticleRequest = async(formData) =>{
   } catch (error) {
     throw error;
   }
-}
+};
 
-export const deleteArticleRequest = async(articleId) =>{
+export const fetchSendAllowance = async (postData) => {
   try {
-    const response = await api.delete(`/moim/sns/article`,{
-      data:{articleId}
+    const response = await api.post("/allowance/send", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteArticleRequest = async (articleId) => {
+  try {
+    const response = await api.delete(`/moim/sns/article`, {
+      data: { articleId },
     });
     return response;
   } catch (error) {
     throw error;
   }
-}
+};
