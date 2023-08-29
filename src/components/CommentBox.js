@@ -1,78 +1,74 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Comment from "./Comment";
 import classes from "./CommentBox.module.css";
 import CommentNew from "./CommentNew";
+import {getArticleDetail} from "../../src/apis/requests";
+function getTimeDifferenceString(timestamp) {
+  const now = new Date();
+  const targetTime = new Date(timestamp);
+  const timeDifference = now - targetTime;
 
-import Profile01 from "../assets/profile01.png";
-import Profile02 from "../assets/profile02.png";
-import Profile03 from "../assets/profile03.png";
-import Profile04 from "../assets/profile04.png";
-import Profile05 from "../assets/profile05.png";
-
-const DUMMY = [
-  {
-    id: 1,
-    image: Profile01,
-    name: "권민선",
-    content:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec in neque et diam sagittis vestibulum ac vitae nisl. Morbi lacinia eu urna a sollicitudin. Quisque felis velit, sollicitudin et placerat id, elementum eget odio. Curabitur vitae mi tortor. Nam eu venenatis libero, quis sagittis justo. Cras sed tortor in leo fringilla porttitor aliquam eu quam. Nulla id pharetra ante, id tincidunt sapien.",
-    date: "3시간 전",
-  },
-  {
-    id: 2,
-    image: Profile02,
-    name: "최안식",
-    content: "두번째 댓글",
-    date: "7시간 전",
-  },
-  {
-    id: 3,
-    image: Profile03,
-    name: "김민재",
-    content: "세번째 댓글",
-    date: "1일 전",
-  },
-  {
-    id: 4,
-    image: Profile04,
-    name: "강민경",
-    content: "네번째 댓글",
-    date: "2일 전",
-  },
-  {
-    id: 5,
-    image: Profile05,
-    name: "민새미",
-    content: "다섯번째 댓글",
-    date: "2일 전",
-  },
-];
-
+  if (timeDifference < 60000) { // Less than 1 minute
+    return `${Math.floor(timeDifference / 1000)}초 전`;
+  } else if (timeDifference < 3600000) { // Less than 1 hour
+    return `${Math.floor(timeDifference / 60000)}분 전`;
+  } else if (timeDifference < 86400000) { // Less than 1 day
+    return `${Math.floor(timeDifference / 3600000)}시간 전`;
+  } else if (timeDifference < 604800000) { // Less than 1 week
+    return `${Math.floor(timeDifference / 86400000)}일 전`;
+  } else if (timeDifference < 1209600000) { // Less than 2 weeks
+    return `${Math.floor(timeDifference / 604800000)}주 전`;
+  } else { // 2 weeks or more
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return targetTime.toLocaleDateString("ko-KR", options);
+  }
+}
 const CommentBox = (props) => {
-  const moreThanThree = DUMMY.length > 3;
+  // let DUMMY = props.comment;
   const [showAllComments, setShowAllComments] = useState(false);
-
+  const [comments, setComments] = useState(props.comment); // 댓글 목록 상태 추가
+  const moreThanThree = comments.length > 3;
   const clickSeeMoreHandler = () => {
     setShowAllComments(!showAllComments);
   };
 
+  async function onCommentSubmit(){
+    try {
+      const response = await getArticleDetail({articleId: props.articleId}); // 서버로부터 업데이트된 댓글 목록을 받아옴
+      console.log(props.articleId)
+      const updatedComments = response.data.data.commentList; // 업데이트된 댓글 목록
+      // props.comment = updatedComments;
+      console.log("onCommentSubmit 호출")
+      console.log(response)
+      setComments(updatedComments);
+      if(updatedComments.length>3){
+        moreThanThree = true;
+      }
+      // this.forceUpdate();
+    } catch (error) {
+      console.error("댓글 추가 후 재랜더링 실패", error);
+    }
+  };
+
   return (
     <div className={classes.container}>
-      {DUMMY.slice(0, 3).map((each) => (
-        <Comment key={each.id} image={each.image} name={each.name} date={each.date} content={each.content} />
+      {comments.slice(0, 3).map((each) => (
+        <Comment key={each.commentId} image={each.image} name={each.writerName} date={getTimeDifferenceString(each.createDate)} content={each.commentContent} />
       ))}
       {showAllComments &&
-        DUMMY.slice(3).map((each) => (
-          <Comment key={each.id} image={each.image} name={each.name} date={each.date} content={each.content} />
+        comments.slice(3).map((each) => (
+          <Comment key={each.commentId} image={each.image} name={each.writerName} date={getTimeDifferenceString(each.createDate)} content={each.commentContent} />
         ))}
-      {moreThanThree && (
+      {comments.length > 3 && (
         <button className={classes.seeMore} onClick={clickSeeMoreHandler}>
           {showAllComments ? "댓글 닫기" : "댓글 전체보기"}
         </button>
       )}
-      <CommentNew />
-    </div>
+      <CommentNew
+        articleId={props.articleId}
+        onCommentSubmit ={onCommentSubmit}
+      />    </div>
   );
 };
 

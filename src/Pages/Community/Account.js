@@ -30,7 +30,7 @@ const Account = (props) => {
         </div>
         <div className={classes.textBox}>
           <div className={classes.upperBox}>
-            <p className={classes.amount}>128,000원</p>
+          <p className={classes.amount}>{props.moim.balance !== undefined ? `${props.moim.balance}원` : 'Nan 원'}</p>
             <PiDotsThreeBold size="32" />
           </div>
           <div className={classes.lowerBox}>

@@ -61,10 +61,13 @@ const SignIn = () => {
       localStorage.setItem("AccessToken", response.headers["authorization"]);
       localStorage.setItem("RefreshToken", response.headers["x-refresh-token"]);
       updateAuthorizationHeader();
+
+      const isParent = response.data.data.userType === "Parent";
       dispatch(
         authActions.login({
           loginId: response.data.data.userId,
-          name: response.data.data.userId,
+          name: response.data.data.userName,
+          userType: isParent,
           accessToken: response.headers["authorization"],
           refreshToken: response.headers["x-refresh-token"],
         })

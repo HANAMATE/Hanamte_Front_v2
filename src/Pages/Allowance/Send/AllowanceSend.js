@@ -1,8 +1,19 @@
-import SetAmount from "../../../components/SetAmount/SetAmount";
+import { useSelector } from "react-redux";
+import SetAmount3 from "../../../components/SetAmount/SetAmoun3";
+import { useLocation } from "react-router-dom";
 
 const Send = () => {
+  const location = useLocation();
+  const { balance } = useSelector((state) => state.auth);
   return (
-    <SetAmount type="send" title="충전하기" subMessage="충전계좌 잔액" balance="241000" buttonMessage="충전하기" />
+    <SetAmount3
+      type="send"
+      title="용돈 보내기"
+      subMessage="내 지갑 잔액"
+      balance={balance}
+      buttonMessage="보내기"
+      childId={location.state.userId}
+    />
   );
 };
 
