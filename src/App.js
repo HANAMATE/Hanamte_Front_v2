@@ -16,12 +16,15 @@ import Allowance from "./Pages/Allowance/Allowance";
 import Fill from "./Pages/Allowance/Fill/Fill";
 import RequestSet from "./Pages/Allowance/ReqeustSet/RequestSet";
 import RequestEnd from "./Pages/Allowance/RequestEnd/RequestEnd";
-import CommunityAccount from "./Pages/Community/Account/CommunityAccount";
+import CommunityAccount from "./Pages/Community/Account/CommunityAccount2";
 import ArticleDetail from "./Pages/Community/ArticleDetail";
 import Loan from "./Pages/Loan/Loan";
 import LoanHistory from "./Pages/Loan/LoanHistory";
 import ApplyForm from "./Pages/Loan/ApplyForm ";
 import Success from "./Pages/Allowance/Success/Success";
+import Moim from "./Pages/Moim/Moim"
+import ArticleForm from "./Pages/Community/ArticleForm";
+import MoimForm from "./Pages/Moim/MoimForm";
 import AllowanceParent from "./Pages/Allowance/Parent/AllowanceParent";
 import Send from "./Pages/Allowance/Send/AllowanceSend";
 import SendWho from "./Pages/Allowance/SendWho/SendWho";
@@ -85,6 +88,9 @@ const router = createBrowserRouter([
   },
   { path: "community", element: <CommunityAccount /> },
   { path: "article", element: <ArticleDetail /> },
+  { path: "moim", element: <Moim /> },
+  { path: "articleForm", element: <ArticleForm /> },
+  { path: "moimForm", element:<MoimForm/>},
 ]);
 
 const App = () => {

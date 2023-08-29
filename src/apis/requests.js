@@ -93,9 +93,36 @@ export const getRequestHistoryChild = async () => {
   }
 };
 
+export const getRequestMyMoimList = async () => {
+  try {
+    const response = await api.get("/moims");
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getRequestMyMoim = async (walletId) => {
+  try {
+    const response = await api.get(`/moim/${walletId}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const getRequestHistoryParent = async () => {
   try {
     const response = await api.get("/allowance/parent/pending");
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const fetchWriteComment = async (commentInfo) => {
+  try {
+    const response = await api.post(`/moim/sns/article/comment`, commentInfo);
     return response;
   } catch (error) {
     throw error;
@@ -111,6 +138,15 @@ export const fetchApprove = async (postData) => {
   }
 };
 
+export const getArticleDetail = async (articleId) => {
+  try {
+    const response = await api.post(`/moim/sns/article/detail`, articleId);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const fetchGetChild = async (postData) => {
   try {
     const response = await api.post("/parent/my-child", postData);
@@ -120,9 +156,33 @@ export const fetchGetChild = async (postData) => {
   }
 };
 
+export const writeArticleRequest = async (formData) => {
+  try {
+    const response = await api.post(`/moim/sns/article`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data", // FormData로 전송할 때 content type 설정
+      },
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const fetchSendAllowance = async (postData) => {
   try {
     const response = await api.post("/allowance/send", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const deleteArticleRequest = async (articleId) => {
+  try {
+    const response = await api.delete(`/moim/sns/article`, {
+      data: { articleId },
+    });
     return response;
   } catch (error) {
     throw error;
