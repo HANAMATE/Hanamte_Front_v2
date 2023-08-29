@@ -22,6 +22,9 @@ const HomeButtonBox = (props) => {
   const sendClickHandler = () => {
     navigate("/allowance/send");
   };
+  const periodicClickHandler = () => {
+    navigate("/allowance/periodic");
+  };
 
   return (
     <div className={classes.container}>
@@ -60,6 +63,13 @@ const HomeButtonBox = (props) => {
           title="내 아이에게"
           subTitle="용돈주기"
           onClick={sendClickHandler}
+        />
+        <HomeButton
+          background="var(--violet2)"
+          icon={<FaWallet size="32" />}
+          title="우리 아이"
+          subTitle="정기용돈 설정하기"
+          onClick={periodicClickHandler}
         />
       </div>
     </div>
