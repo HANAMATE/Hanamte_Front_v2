@@ -1,126 +1,133 @@
 import React from "react";
 import styled, { css } from "styled-components";
-import useDetectClose from "../hooks/useDetectCLose"
+import useDetectClose from "../hooks/useDetectCLose";
 import classes from "../../src/Pages/Community/Article.module.css";
-import {PiDotsThreeBold} from "react-icons/pi";
+import { PiDotsThreeBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
 import { deleteArticleRequest } from "../apis/requests";
 
-
-const DropdownMenu = ({transaction, setIsNew}) => {
+const DropdownMenu = ({ transaction, setIsNew }) => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
   const navigate = useNavigate();
-  console.log(transaction)
 
   const wrtieClickHandler = () => {
     if (transaction.article !== null) {
       navigate("/articleForm", { state: { transaction } });
     } else {
-      navigate("/articleForm",{ state: {transaction } });
+      navigate("/articleForm", { state: { transaction } });
     }
   };
 
-  const updateClickHandler = ()=>{
-    navigate("/articleForm",{ state: { transaction } })
-  }
-  
-  const  deleteClickHandler = async()=>{
+  const updateClickHandler = () => {
+    navigate("/articleForm", { state: { transaction } });
+  };
+
+  const deleteClickHandler = async () => {
     try {
-        const response = await deleteArticleRequest(transaction.article.articleId);
-        console.log(response);
-        if (response.data.state === 200) {
-            console.log("Article deleted successfully!");
-            const walletId = transaction.walletId;
-            // navigate("/community",{state:{walletId}}); // 리다이렉트
-            setIsNew(prev => !prev);
-          } else {
-            console.error("Failed to delete article.");
-          }
-    } catch(error){
-        console.error("글 삭제 실패",error)
+      const response = await deleteArticleRequest(
+        transaction.article.articleId
+      );
+      console.log(response);
+      if (response.data.state === 200) {
+        console.log("Article deleted successfully!");
+        const walletId = transaction.walletId;
+        // navigate("/community",{state:{walletId}}); // 리다이렉트
+        setIsNew((prev) => !prev);
+      } else {
+        console.error("Failed to delete article.");
+      }
+    } catch (error) {
+      console.error("글 삭제 실패", error);
     }
-  }
+  };
   return (
     <div className={classes.right}>
-    <DropdownContainer>
+      <DropdownContainer>
         <DropdownButton onClick={boardHandler} ref={boardRef}>
-        <PiDotsThreeBold size="24" />
+          <PiDotsThreeBold size="24" />
         </DropdownButton>
         <Menu isDropped={boardIsOpen}>
           <Ul>
-            {transaction.article !==null ? (
+            {transaction.article !== null ? (
               <>
                 <Li>
-                  <LinkWrapper onClick={()=>updateClickHandler()}>글 수정</LinkWrapper>
+                  <LinkWrapper onClick={() => updateClickHandler()}>
+                    글 수정
+                  </LinkWrapper>
                 </Li>
                 <Li>
-                  <LinkWrapper onClick={()=>deleteClickHandler()}>글 삭제</LinkWrapper>
+                  <LinkWrapper onClick={() => deleteClickHandler()}>
+                    글 삭제
+                  </LinkWrapper>
                 </Li>
               </>
             ) : (
               <Li>
-                <LinkWrapper onClick={()=>wrtieClickHandler()}>글 작성</LinkWrapper>
+                <LinkWrapper onClick={() => wrtieClickHandler()}>
+                  글 작성
+                </LinkWrapper>
               </Li>
             )}
           </Ul>
         </Menu>
       </DropdownContainer>
-      </div>
+    </div>
   );
 };
 
-export const DropdownMenuForComment = ({transaction, setIsNew}) => {
-    const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
-    const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
-    const navigate = useNavigate();
-    console.log(transaction)
-  
-    const wrtieClickHandler = () => {
-      if (transaction.article !== null) {
-        console.log(transaction.article.articleId + "번으로 들어가는중");
-        navigate("/articleForm", { state: { transaction } });
-      } else {
-          console.log("빈곳으로 들어가서 작성해야징 + 트랜잭션 id = " + transaction.id);
-        navigate("/articleForm",{ state: {transaction } });
-      }
-    };
-    const  deleteClickHandler = async()=>{
-      try {
-          const response = await deleteArticleRequest(transaction.article.articleId);
-          console.log(response);
-          if (response.data.state === 200) {
-              console.log("Article deleted successfully!");
-              const walletId = transaction.walletId;
-              // navigate("/community",{state:{walletId}}); // 리다이렉트
-              setIsNew(prev => !prev);
-            } else {
-              console.error("Failed to delete article.");
-            }
-      } catch(error){
-          console.error("글 삭제 실패",error)
-      }
+export const DropdownMenuForComment = ({ transaction, setIsNew }) => {
+  const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
+  const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
+  const navigate = useNavigate();
+
+  const wrtieClickHandler = () => {
+    if (transaction.article !== null) {
+      navigate("/articleForm", { state: { transaction } });
+    } else {
+      navigate("/articleForm", { state: { transaction } });
     }
-    return (
-      <div className={classes.right}>
-      <DropdownContainer>
-          <DropdownButton onClick={boardHandler} ref={boardRef}>
-          <PiDotsThreeBold size="24" />
-          </DropdownButton>
-          <Menu isDropped={boardIsOpen}>
-            <Ul>
-                  <Li>
-                    <LinkWrapper href="#2-2">글 수정</LinkWrapper>
-                  </Li>
-                  <Li>
-                    <LinkWrapper onClick={()=>deleteClickHandler()}>글 삭제</LinkWrapper>
-                  </Li>
-            </Ul>
-          </Menu>
-        </DropdownContainer>
-        </div>
-    );
   };
+  const deleteClickHandler = async () => {
+    try {
+      const response = await deleteArticleRequest(
+        transaction.article.articleId
+      );
+      console.log(response);
+      if (response.data.state === 200) {
+        console.log("Article deleted successfully!");
+        const walletId = transaction.walletId;
+        // navigate("/community",{state:{walletId}}); // 리다이렉트
+        setIsNew((prev) => !prev);
+      } else {
+        console.error("Failed to delete article.");
+      }
+    } catch (error) {
+      console.error("글 삭제 실패", error);
+    }
+  };
+  return (
+    <div className={classes.right}>
+      <DropdownContainer>
+        <DropdownButton onClick={boardHandler} ref={boardRef}>
+          <PiDotsThreeBold size="24" />
+        </DropdownButton>
+        <Menu isDropped={boardIsOpen}>
+          <Ul>
+            <Li>
+              <LinkWrapper href="#2-2">글 수정</LinkWrapper>
+            </Li>
+            <Li>
+              <LinkWrapper onClick={() => deleteClickHandler()}>
+                글 삭제
+              </LinkWrapper>
+            </Li>
+          </Ul>
+        </Menu>
+      </DropdownContainer>
+    </div>
+  );
+};
 export default DropdownMenu;
 
 // const Wrapper = styled.div`
@@ -188,7 +195,6 @@ const Menu = styled.div`
       box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
     `};
 `;
-
 
 const Ul = styled.ul`
   & > li {
