@@ -22,6 +22,10 @@ import Loan from "./Pages/Loan/Loan";
 import LoanHistory from "./Pages/Loan/LoanHistory";
 import ApplyForm from "./Pages/Loan/ApplyForm ";
 import Success from "./Pages/Allowance/Success/Success";
+import AllowanceParent from "./Pages/Allowance/Parent/AllowanceParent";
+import Send from "./Pages/Allowance/Send/AllowanceSend";
+import SendWho from "./Pages/Allowance/SendWho/SendWho";
+import Periodic from "./Pages/Allowance/Periodic/Periodic";
 // import Error from "./Pages/Error/Error";
 
 const router = createBrowserRouter([
@@ -58,7 +62,16 @@ const router = createBrowserRouter([
               { path: "end", element: <RequestEnd /> },
             ],
           },
+          { path: "parent", element: <AllowanceParent /> },
+          { path: "periodic", element: <Periodic /> },
           { path: "history", element: <History /> },
+          {
+            path: "send",
+            children: [
+              { index: true, element: <SendWho /> },
+              { path: "set", element: <Send /> },
+            ],
+          },
           {
             path: "fill",
             children: [
