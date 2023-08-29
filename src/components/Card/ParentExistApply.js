@@ -47,7 +47,7 @@ const ExistApply = (props) => {
     return durationInDays;
   };
   const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMyODc5Mzh9.eJruGKBTLzXINYOAVmaMEd8-HQME5zBUvPlAas8Y3yg";
+  localStorage.getItem("AccessToken");
 
   const handleApprove = async (e) => {
     e.preventDefault();

@@ -65,7 +65,7 @@ const ApplyForm = (props) => {
   const [loanInfo, setLoanInfo] = useState(null);
   const [dummy, setDummy] = useState([]);
   const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MyIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMxNTE1NjV9.PafqBDIg7GLZqP0lA0X6varl382fPXUWsZGRtQshg34";
+  localStorage.getItem("AccessToken");
   // const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
 
   useEffect(() => {

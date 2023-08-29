@@ -24,7 +24,7 @@ const Loan = (props) => {
   const [historyInfo, setHistoryInfo] = useState([]);
   const [dummy, setDummy] = useState([]);
   const accessToken =
-    "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2OTMyODc5Mzh9.eJruGKBTLzXINYOAVmaMEd8-HQME5zBUvPlAas8Y3yg";
+  localStorage.getItem("AccessToken");
   const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
 
   //   const {
