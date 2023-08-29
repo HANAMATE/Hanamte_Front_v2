@@ -129,3 +129,27 @@ export const getArticleDetail = async(articleId) =>{
     throw error;
   }
 }
+
+export const writeArticleRequest = async(formData) =>{
+  try {
+    const response = await api.post(`/moim/sns/article`,formData,{
+      headers: {
+        "Content-Type": "multipart/form-data", // FormData로 전송할 때 content type 설정
+      },
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const deleteArticleRequest = async(articleId) =>{
+  try {
+    const response = await api.delete(`/moim/sns/article`,{
+      data:{articleId}
+    });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}

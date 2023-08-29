@@ -46,33 +46,32 @@ const CommunityAccount = (props) => {
   const { walletId } = location.state; // walletId 값을 받아옴
   const [moim, setMoim] = useState([]);
   const [transactions, setTransactions] = useState([]);
+  const [isNew, setIsNew] = useState(false);
 
   async function getMyMoim(walletId) {
     try {
         const response = await getRequestMyMoim(walletId);
-        console.log("getMyMoim 실행 walletID = " + walletId)
         if (response.data.data !== []) {
           setMoim(response.data.data);
           setTransactions(response.data.data.transactionList)
-          await console.log(moim)
-          await console.log(transactions)
         }
       } catch (error) {
         console.error("getMyMoim 실패", error);
-      }finally{
-        await console.log(moim)
       }
     }
+
     useEffect(()=>{
       getMyMoim(walletId);
     }, []);
 
-
+    useEffect(()=>{
+      getMyMoim(walletId);
+    }, [isNew]);
 
   return (
     <CommunityLayout>
       <Header left="back" title={moim.walletName} right="blank" />
-      <div className={classes.container}>
+      <div>
         {/* <div className={classes.walletBox}>
           <Wallet color="blue" />s
         </div> */}
@@ -81,7 +80,7 @@ const CommunityAccount = (props) => {
           {transactions.map((transaction) => {
             return (
             <div /*style={{margin :'10px 0'}}*/>
-              <Article key={transaction.id} image={transaction} transaction={transaction} walletId={transaction.walletId}/>
+              <Article key={transaction.id} image={transaction} transaction={transaction} walletId={transaction.walletId} setIsNew={setIsNew}/>
             </div>
             );
           })} 

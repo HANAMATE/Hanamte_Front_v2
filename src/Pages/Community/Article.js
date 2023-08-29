@@ -43,7 +43,7 @@ const Article = (props) => {
           </div>
         </div>
         <div className={classes.right}>
-          {<DropDown article={props.transaction.article}></DropDown>}
+          {<DropDown transaction={props.transaction} setIsNew={props.setIsNew}></DropDown>}
         </div>
       </div>
       {props.transaction.article !== null ? (

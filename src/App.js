@@ -20,6 +20,8 @@ import CommunityAccount from "./Pages/Community/Account/CommunityAccount2";
 import ArticleDetail from "./Pages/Community/ArticleDetail";
 import Success from "./Pages/Allowance/Success/Success";
 import Moim from "./Pages/Moim/Moim"
+import ArticleForm from "./Pages/Community/ArticleForm";
+import MoimForm from "./Pages/Moim/MoimForm";
 // import Error from "./Pages/Error/Error";
 
 const router = createBrowserRouter([
@@ -62,6 +64,8 @@ const router = createBrowserRouter([
   { path: "community", element: <CommunityAccount /> },
   { path: "article", element: <ArticleDetail /> },
   { path: "moim", element: <Moim /> },
+  { path: "articleForm", element: <ArticleForm /> },
+  { path: "moimForm", element:<MoimForm/>},
 ]);
 
 const App = () => {
