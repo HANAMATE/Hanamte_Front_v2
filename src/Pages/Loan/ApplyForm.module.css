@@ -140,7 +140,7 @@
 }
 
 .durationButtons .selected {
-  background-color: #81a6eb;
+  background-color: var(--red2);
   color: white;
 }
 

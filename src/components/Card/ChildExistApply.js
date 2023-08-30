@@ -32,7 +32,11 @@ const ExistApply = (props) => {
     <div className={`${classes.existapply} ${existapplyColor}`}>
       <div className={classes.firstRow}>
         <div className={classes.titleBox}>
-          <p className={classes.subTitle}>대출 신청 결과를 기다리고 있어요</p>
+          <p className={classes.subTitle}>
+            {props.valid
+              ? "진행 중인 대출"
+              : "대출 신청 결과를 기다리고 있어요!"}
+          </p>
           <p className={classes.title}>
             대출명 : {props.loanName.toLocaleString()}
           </p>
@@ -42,10 +46,6 @@ const ExistApply = (props) => {
           <p className={classes.title}>메시지 : {props.loanMessage}</p>
         </div>
       </div>
-{/* 
-      <div className={classes.secondRow}>
-
-      </div> */}
     </div>
   );
 };

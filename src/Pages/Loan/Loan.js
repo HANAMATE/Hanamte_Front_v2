@@ -23,8 +23,7 @@ const Loan = (props) => {
   const [loanInfo, setLoanInfo] = useState(null);
   const [historyInfo, setHistoryInfo] = useState([]);
   const [dummy, setDummy] = useState([]);
-  const accessToken =
-  localStorage.getItem("AccessToken");
+  const accessToken = localStorage.getItem("AccessToken");
   const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
 
   //   const {
@@ -118,6 +117,7 @@ const Loan = (props) => {
             loanName={loanInfo.loanName}
             loanAmount={loanInfo.loanAmount}
             loanMessage={loanInfo.loanMessage}
+            valid={loanInfo.valid}
           />
         ) : (
           <ChildEmptyApply />
