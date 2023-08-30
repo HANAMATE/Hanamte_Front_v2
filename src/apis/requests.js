@@ -188,3 +188,58 @@ export const deleteArticleRequest = async (articleId) => {
     throw error;
   }
 };
+
+export const createMoimWalletRequest = async (postData) => {
+  try {
+    const response = await api.post("/moim", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const moimDepositRequest = async (postData) => {
+  try {
+    const response = await api.post("/moim", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const transferRequest = async (postData) => {
+  try {
+    const response = await api.post("/my-wallet/transfer", postData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+export const putMoimRequest = async (putData) => {
+  try {
+    const response = await api.put("/moim", putData);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+export const deleteMoimRequest = async (requestId) => {
+  try {
+    console.log(requestId);
+
+    const response = await api.delete("/moim", { data: requestId });
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const doLikeRequest = async (articleId) => {
+  try {
+    console.log(articleId);
+    const response = await api.post("/moim/sns/article/like", articleId);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+};

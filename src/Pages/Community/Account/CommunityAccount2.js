@@ -1,4 +1,4 @@
-import { Fragment ,useState, useEffect} from "react";
+import { Fragment, useState, useEffect } from "react";
 import classes from "./CommunityAccount.module.css";
 import Header from "../../../components/Layout/Header";
 import CommunityLayout from "../../../components/Layout/CommunityLayout";
@@ -23,7 +23,7 @@ import CommunityHeader from "../../../components/Layout/CommunityHeader";
 import Section from "../../../components/Card/Section";
 import Wallet from "../../../components/Card/Wallet";
 import Account from "../Account";
-import {getRequestMyMoim} from "../../../../src/apis/requests";
+import { getRequestMyMoim } from "../../../../src/apis/requests";
 
 const DUMMY_ARTICLE = [
   // DUMMY00,
@@ -50,23 +50,23 @@ const CommunityAccount = (props) => {
 
   async function getMyMoim(walletId) {
     try {
-        const response = await getRequestMyMoim(walletId);
-        if (response.data.data !== []) {
-          setMoim(response.data.data);
-          setTransactions(response.data.data.transactionList)
-        }
-      } catch (error) {
-        console.error("getMyMoim 실패", error);
+      const response = await getRequestMyMoim(walletId);
+      if (response.data.data !== []) {
+        setMoim(response.data.data);
+        setTransactions(response.data.data.transactionList);
       }
+    } catch (error) {
+      console.error("getMyMoim 실패", error);
     }
+  }
 
-    useEffect(()=>{
-      getMyMoim(walletId);
-    }, []);
+  useEffect(() => {
+    getMyMoim(walletId);
+  }, []);
 
-    useEffect(()=>{
-      getMyMoim(walletId);
-    }, [isNew]);
+  useEffect(() => {
+    getMyMoim(walletId);
+  }, [isNew]);
 
   return (
     <CommunityLayout>
@@ -75,15 +75,26 @@ const CommunityAccount = (props) => {
         {/* <div className={classes.walletBox}>
           <Wallet color="blue" />s
         </div> */}
-        <Account moim={moim} />
-        <Section community={true} title="모임일기" seeMore={true} seeMoreText="거래내역 전체보기">
-          {transactions.map((transaction) => {
+        <Account moim={moim} setIsNew={setIsNew} />
+        <Section
+          community={true}
+          title="모임일기"
+          seeMore={true}
+          seeMoreText="거래내역 전체보기"
+        >
+          {transactions.reverse().map((transaction) => {
             return (
-            <div /*style={{margin :'10px 0'}}*/>
-              <Article key={transaction.id} image={transaction} transaction={transaction} walletId={transaction.walletId} setIsNew={setIsNew}/>
-            </div>
+              <div /*style={{margin :'10px 0'}}*/>
+                <Article
+                  key={transaction.id}
+                  image={transaction}
+                  transaction={transaction}
+                  walletId={transaction.walletId}
+                  setIsNew={setIsNew}
+                />
+              </div>
             );
-          })} 
+          })}
         </Section>
         <section className={classes.articleSection}></section>
       </div>

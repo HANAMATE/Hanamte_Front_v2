@@ -61,7 +61,6 @@ const SignIn = () => {
       localStorage.setItem("AccessToken", response.headers["authorization"]);
       localStorage.setItem("RefreshToken", response.headers["x-refresh-token"]);
       updateAuthorizationHeader();
-
       const isParent = response.data.data.userType === "Parent";
       dispatch(
         authActions.login({
@@ -70,6 +69,7 @@ const SignIn = () => {
           userType: isParent,
           accessToken: response.headers["authorization"],
           refreshToken: response.headers["x-refresh-token"],
+          myWalletId: response.data.data.myWalletId,
         })
       );
       navigate("/");

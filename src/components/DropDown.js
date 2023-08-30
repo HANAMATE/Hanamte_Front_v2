@@ -4,8 +4,7 @@ import useDetectClose from "../hooks/useDetectCLose";
 import classes from "../../src/Pages/Community/Article.module.css";
 import { PiDotsThreeBold } from "react-icons/pi";
 import { useNavigate } from "react-router-dom";
-import { deleteArticleRequest } from "../apis/requests";
-
+import { deleteArticleRequest, deleteMoimRequest } from "../apis/requests";
 const DropdownMenu = ({ transaction, setIsNew }) => {
   const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
   const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
@@ -52,23 +51,100 @@ const DropdownMenu = ({ transaction, setIsNew }) => {
             {transaction.article !== null ? (
               <>
                 <Li>
-                  <LinkWrapper onClick={() => updateClickHandler()}>
+                  <LinkWrapper
+                    style={{ cursor: "pointer" }}
+                    onClick={() => updateClickHandler()}
+                  >
                     글 수정
                   </LinkWrapper>
                 </Li>
                 <Li>
-                  <LinkWrapper onClick={() => deleteClickHandler()}>
+                  <LinkWrapper
+                    style={{ cursor: "pointer" }}
+                    onClick={() => deleteClickHandler()}
+                  >
                     글 삭제
                   </LinkWrapper>
                 </Li>
               </>
             ) : (
               <Li>
-                <LinkWrapper onClick={() => wrtieClickHandler()}>
+                <LinkWrapper
+                  style={{ cursor: "pointer" }}
+                  onClick={() => wrtieClickHandler()}
+                >
                   글 작성
                 </LinkWrapper>
               </Li>
             )}
+          </Ul>
+        </Menu>
+      </DropdownContainer>
+    </div>
+  );
+};
+
+export const DropdownMenuForAccount = ({ moim, setIsNew }) => {
+  const [myPageIsOpen, myPageRef, myPageHandler] = useDetectClose(false);
+  const [boardIsOpen, boardRef, boardHandler] = useDetectClose(false);
+  const navigate = useNavigate();
+
+  const updateClickHandler = () => {
+    if (moim !== null) {
+      navigate("/moimForm", { state: { moim } });
+    } else {
+      navigate("/moimForm", { state: { moim } });
+    }
+  };
+  const deleteClickHandler = async () => {
+    if (moim.balance > 0) {
+      alert("통장잔고가 0원이 아니면 삭제할 수 없습니다.");
+      return;
+    }
+    try {
+      console.log(moim.walletId);
+      const requestBody = {
+        requestId: moim.walletId,
+      };
+      console.log(requestBody);
+      const response = await deleteMoimRequest(requestBody);
+      // console.log(response);
+      if (response.data.state === 200) {
+        console.log("모임통장 삭제에 성공했습니다!");
+        // setIsNew((prev) => !prev);
+        navigate(-1); // 리다이렉트
+      } else {
+        console.error("Failed to delete 모임통장.");
+      }
+    } catch (error) {
+      console.error("모임통장 삭제 실패", error);
+    }
+  };
+
+  return (
+    <div className={classes.right}>
+      <DropdownContainer>
+        <DropdownButton onClick={boardHandler} ref={boardRef}>
+          <PiDotsThreeBold size="24" />
+        </DropdownButton>
+        <Menu isDropped={boardIsOpen}>
+          <Ul>
+            <Li>
+              <LinkWrapper
+                onClick={() => updateClickHandler()}
+                style={{ cursor: "pointer" }}
+              >
+                통장 정보 수정
+              </LinkWrapper>
+            </Li>
+            <Li>
+              <LinkWrapper
+                onClick={() => deleteClickHandler()}
+                style={{ cursor: "pointer" }}
+              >
+                통장 삭제
+              </LinkWrapper>
+            </Li>
           </Ul>
         </Menu>
       </DropdownContainer>
@@ -129,19 +205,6 @@ export const DropdownMenuForComment = ({ transaction, setIsNew }) => {
   );
 };
 export default DropdownMenu;
-
-// const Wrapper = styled.div`
-//   margin: 100px auto;
-//   display: flex;
-//   justify-content: space-around;
-//   align-items: center;
-//   color: white;
-//   font-size: 19px;
-//   background: gray;
-//   width: 400px;
-//   height: 50px;
-//   font-weight: bold;
-// `;
 
 const DropdownContainer = styled.div`
   position: relative;
