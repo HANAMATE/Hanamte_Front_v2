@@ -46,8 +46,7 @@ const ExistApply = (props) => {
     );
     return durationInDays;
   };
-  const accessToken =
-  localStorage.getItem("AccessToken");
+  const accessToken = localStorage.getItem("AccessToken");
 
   const handleApprove = async (e) => {
     e.preventDefault();
@@ -117,7 +116,9 @@ const ExistApply = (props) => {
       <div className={classes.firstRow}>
         <div className={classes.titleBox}>
           <p className={classes.subTitle}>
-            {props.valid ? "진행 중인 대출" : "아이가 대출을 신청했어요!"}
+            {props.valid
+              ? "아이가 진행 중인 대출"
+              : "아이가 대출을 신청했어요!"}
           </p>
           <p className={classes.title}>
             대출명 : {props.loanName.toLocaleString()}

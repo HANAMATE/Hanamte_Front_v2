@@ -16,11 +16,11 @@ const validateAmount = (amount) => {
 };
 
 const validateLoanName = (loanName) => {
-  return /^[a-zA-Z가-힣0-9]{1,10}$/.test(loanName);
+  return /^[a-zA-Z가-힣0-9\s]{1,10}$/.test(loanName);
 };
 
 const validateLoanMsg = (loanMsg) => {
-  return /^[a-zA-Z가-힣0-9]{0,20}$/.test(loanMsg);
+  return /^[a-zA-Z가-힣0-9\s]{1,20}$/.test(loanMsg);
 };
 const ApplyForm = (props) => {
   const navigate = useNavigate();
