@@ -15,9 +15,8 @@ import axios from "axios";
 const Home = () => {
   const navigate = useNavigate();
 
-  const { isAuthenticated, loginId, name, balance, accessToken } = useSelector(
-    (state) => state.auth
-  );
+  const { isAuthenticated, loginId, name, balance, accessToken, myWalletId } =
+    useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,6 +40,7 @@ const Home = () => {
               userType: isParent,
               accessToken: localStorageAT,
               refreshToken: localStorageRT,
+              myWalletId: response.data.data.myWalletId,
             })
           );
         })
