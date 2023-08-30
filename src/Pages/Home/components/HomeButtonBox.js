@@ -51,6 +51,13 @@ const HomeButtonBox = (props) => {
               onClick={myMoimClickHandler}
             />
             <HomeButton
+              background="var(--yellow2)"
+              icon={<RiBankFill size="32" />}
+              title="아이가"
+              subTitle="대출을 신청했어요"
+              onClick={loanClickHandler}
+            />
+            <HomeButton
               background="var(--red2)"
               icon={<BsFillPeopleFill size="32" />}
               title="내 아이에게"
