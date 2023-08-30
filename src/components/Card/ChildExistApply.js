@@ -1,9 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { RiInformationFill } from "react-icons/ri";
-import { FaWallet, FaPercentage, FaCoins, FaMoneyCheck } from "react-icons/fa";
-// import classes from "./Wallet.module.css";
-import ApproveBtn from "../Button/ApproveBtn";
-import RefuseBtn from "../Button/RefuseBtn";
 import classes from "./ExistApply.module.css";
 
 const ExistApply = (props) => {

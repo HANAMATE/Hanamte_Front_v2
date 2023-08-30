@@ -15,26 +15,11 @@ import TransactionBox from "../../components/Card/TransactionBox";
 import TransactionLoan from "../../components/Card/TransactionLoan";
 import axios from "axios";
 
-import Button2 from "../../components/Button/Button2";
-import Input from "../../components/Input/Input";
-import ApproveBtn from "../../components/Button/ApproveBtn";
-
 const Loan = (props) => {
   const [loanInfo, setLoanInfo] = useState(null);
   const [historyInfo, setHistoryInfo] = useState([]);
-  const [dummy, setDummy] = useState([]);
   const accessToken = localStorage.getItem("AccessToken");
   const { userType } = useSelector((state) => state.auth); // assuming userType is available in the state
-
-  //   const {
-  //   // isAuthenticated,
-  //   loanName,
-  //   loanAmount,
-  //   // balance,
-  //   loanMessage,
-  //   // accessToken,
-  //   // loginId,
-  // } = useSelector((state) => state.auth);
 
   const formatDate = (date) => {
     if (!date) {
@@ -58,19 +43,13 @@ const Loan = (props) => {
         },
       })
       .then((res) => {
-        // axios.get("https://hanamate.onrender.com/").then((res) => {
         if (res.data.state === 200) {
           console.log("Success on React Server");
           setLoanInfo(res.data.data);
-          console.log(res.data.data);
         } else if (res.data.state === 204) {
-          // setLoanInfo(res.data.data);
-          console.log("대출 신청 내역이 없습니다");
           setLoanInfo(res.data.data);
-          console.log(res.data.data);
         } else {
-          console.log("토큰 유효기간이 끝났을 겁니당~");
-          // setLoanInfo(res.data.data);
+          console.log("접근이 불가능합니다");
         }
       });
 

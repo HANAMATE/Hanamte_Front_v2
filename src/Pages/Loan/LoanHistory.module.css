@@ -19,14 +19,9 @@
 .default {
   background-color: var(--red1);
 }
-/* .default {
-    background-color: var(--violet2);
-  } */
+
 .existapply .firstRow {
-  /* display: flex; */
   justify-content: space-between;
-  /* margin-bottom: 30px; */
-  /* margin-top: 30px; */
 }
 .existapply .titleBox {
   display: flex;
@@ -39,8 +34,6 @@
   color: #f9f9f9;
   font-size: 1.3rem;
   font-weight: 700;
-  /* margin-bottom: 30px; */
-  /* text-align: center; */
 }
 .existapply .secondRow {
   display: flex;
