@@ -6,8 +6,8 @@ import useInput from "../../hooks/use-input";
 import Input from "../../components/Input/Input";
 import classes2 from "../Loan/ApplyForm.module.css";
 import Button1 from "../../components/Button/Button1";
-import { createMoimWalletRequest } from "../../apis/requests";
-import { useNavigate } from "react-router-dom";
+import { createMoimWalletRequest, putMoimRequest } from "../../apis/requests";
+import { useLocation, useNavigate } from "react-router-dom"; // useLocation 추가
 import { useSelector } from "react-redux";
 
 const MoimForm = (props) => {
@@ -17,8 +17,9 @@ const MoimForm = (props) => {
   const validateMoimTarget = (parameter) => {
     return /^[0-9]{0,10}$/.test(parameter);
   };
+  const location = useLocation();
+  const { moim } = location.state;
 
-  const { myWalletId } = useSelector((state) => state.auth);
   //모임 통장 이름
   const {
     value: moimNameValue,
@@ -26,7 +27,8 @@ const MoimForm = (props) => {
     hasError: moimNameInputHasError,
     valueChangeHandler: moimNameChangeHandler,
     inputBlurHandler: moimNameBlurHandler,
-  } = useInput(validateMoimName);
+  } = useInput(validateMoimName, moim !== null ? moim.walletName : "");
+
   //모임 통장 목표 금액
   const {
     value: moimTargetValue,
@@ -34,12 +36,31 @@ const MoimForm = (props) => {
     hasError: moimTargetHasError,
     valueChangeHandler: moimTargetChangeHandler,
     inputBlurHandler: moimTargetBlurHandler,
-  } = useInput(validateMoimName);
+  } = useInput(
+    validateMoimTarget,
+    moim !== null ? moim.targetAmount.toString() : ""
+  );
+
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(myWalletId);
-  }, []);
+  const updateMoimWalletClick = async () => {
+    const requestBody = {
+      moimWalletId: moim.walletId,
+      walletName: moimNameValue,
+      targetAmount: moimTargetValue,
+    };
+    console.log(moim.walletId);
+    console.log(moimNameValue);
+    console.log(moimTargetValue);
+    try {
+      const response = await putMoimRequest(requestBody);
+      console.log("수정 성공! : ", response);
+      navigate("/moim");
+    } catch (error) {
+      console.error("모임통장 수정 실패! : ", error);
+      console.error("모임통장 수정에 실패했습니다!");
+    }
+  };
 
   const createMoimWallet = async () => {
     const requestBody = {
@@ -83,6 +104,7 @@ const MoimForm = (props) => {
                 type="text"
                 placeholder="모임통장 이름을 적어주세요(10자 이내)"
                 required={true}
+                value={moim !== null ? moimNameValue : ""} // 3항 연산자 사용
                 onChange={moimNameChangeHandler}
                 onBlur={moimNameBlurHandler}
                 error={moimNameInputHasError}
@@ -93,13 +115,20 @@ const MoimForm = (props) => {
                 type="text"
                 placeholder="목표 금액을 적어주세요(10자 이내)"
                 required={true}
+                value={moim !== null ? moimTargetValue : ""} // 3항 연산자 사용
                 onChange={moimTargetChangeHandler}
                 onBlur={moimTargetBlurHandler}
                 error={moimTargetHasError}
                 errorMessage="목표 금액을 다시 입력해주세요.(숫자만 입력)"
               />
             </div>
-            <Button1 onClick={() => createMoimWallet()}>개설하기</Button1>
+            {moim !== null ? (
+              <Button1 onClick={() => updateMoimWalletClick()}>
+                수정하기
+              </Button1>
+            ) : (
+              <Button1 onClick={() => createMoimWallet()}>개설하기</Button1>
+            )}{" "}
           </div>
         </div>
         <div className={classes.inputContainer}></div>

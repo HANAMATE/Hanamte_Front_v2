@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 // 제네릭
-const useInput = (validate) => {
+const useInput = (validate, initialValue = "") => {
   const [value, setValue] = useState("");
   const [isTouched, setIsTouched] = useState(false);
 
@@ -20,6 +20,10 @@ const useInput = (validate) => {
     setValue("");
     setIsTouched(false);
   };
+  useEffect(() => {
+    console.log("Initial value:", initialValue);
+    if (initialValue !== null) setValue(initialValue);
+  }, [initialValue]);
 
   return {
     value,

@@ -40,7 +40,7 @@ const Home = () => {
               userType: isParent,
               accessToken: localStorageAT,
               refreshToken: localStorageRT,
-              moimWalletid: response.data.data.myWalletId,
+              myWalletId: response.data.data.myWalletId,
             })
           );
         })
