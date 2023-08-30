@@ -13,7 +13,6 @@ import axios from "axios";
 import Button2 from "../../components/Button/Button2";
 import Input from "../../components/Input/Input";
 import ApproveBtn from "../../components/Button/ApproveBtn";
-// import classes from "../../components/Card/EmptyApply.module.css";
 import classes from "./LoanHistory.module.css";
 const LoanHistory = (props) => {
   let existapplyColor = "";

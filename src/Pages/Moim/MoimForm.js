@@ -12,7 +12,8 @@ import { useSelector } from "react-redux";
 
 const MoimForm = (props) => {
   const validateMoimName = (parameter) => {
-    return /^[a-zA-Z가-힣0-9]{1,10}$/.test(parameter);
+    // 첫 번째 문자는 공백이 아닌 문자로 시작하고, 중간에 공백을 포함하는지 검증
+    return /^[^\s][a-zA-Z가-힣0-9\s]{0,9}$/.test(parameter);
   };
   const validateMoimTarget = (parameter) => {
     return /^[0-9]{0,10}$/.test(parameter);
@@ -44,6 +45,11 @@ const MoimForm = (props) => {
   const navigate = useNavigate();
 
   const updateMoimWalletClick = async () => {
+    if (!moimNameeIsValid) {
+      // 모임 통장 이름이나 목표 금액이 유효하지 않으면 더 이상 진행하지 않음
+      alert("모임통장의 이름이 조건에 만족하는지 확인하고 다시 시도해주세요!");
+      return;
+    }
     const requestBody = {
       moimWalletId: moim.walletId,
       walletName: moimNameValue,
@@ -63,6 +69,11 @@ const MoimForm = (props) => {
   };
 
   const createMoimWallet = async () => {
+    if (!moimNameeIsValid) {
+      // 모임 통장 이름이나 목표 금액이 유효하지 않으면 더 이상 진행하지 않음
+      alert("모임통장의 이름이 조건에 만족하는지 확인하고 다시 시도해주세요!");
+      return;
+    }
     const requestBody = {
       walletName: moimNameValue,
       targetAmount: moimTargetValue,
@@ -108,7 +119,7 @@ const MoimForm = (props) => {
                 onChange={moimNameChangeHandler}
                 onBlur={moimNameBlurHandler}
                 error={moimNameInputHasError}
-                errorMessage="모임통장 이름을 다시 입력해주세요."
+                errorMessage="모임통장 이름을 다시 입력해주세요.(처음에 공백 x)"
               />
               <p>목표 금액</p>
               <Input
