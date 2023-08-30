@@ -13,7 +13,7 @@ const validateAmountValue = (parameter) => {
   return /^[0-9]{0,10}$/.test(parameter);
 };
 const validateMessageValue = (parameter) => {
-  return /^[a-zA-Z가-힣0-9]{0,10}$/.test(parameter);
+  return /^[^\s][a-zA-Z가-힣0-9\s]{0,10}$/.test(parameter);
 };
 function DepositModal({ onClose, moimWalletId, setIsNew }) {
   const { myWalletId } = useSelector((state) => state.auth);
@@ -52,6 +52,18 @@ function DepositModal({ onClose, moimWalletId, setIsNew }) {
     };
     try {
       const response = await transferRequest(requestBody);
+      if (!amountValueIsValid) {
+        // 모임 통장 이름이나 목표 금액이 유효하지 않으면 더 이상 진행하지 않음
+        alert("입금할 금액을 확인하고 다시 입력해주세요.(숫자만, 10자리 이내)");
+        return;
+      }
+      if (!messageValueIsValid) {
+        // 모임 통장 이름이나 목표 금액이 유효하지 않으면 더 이상 진행하지 않음
+        alert(
+          "거래내역에 남길 메시지를 입력해주세요(첫글자 공백 x, 공백 포함 10글자 이내)"
+        );
+        return;
+      }
       if (response.data.state === 200) {
         console.log("모임통장으로 입금 성공 : ", response);
         alert("입금에 성공했습니다!");
@@ -97,7 +109,7 @@ function DepositModal({ onClose, moimWalletId, setIsNew }) {
           onChange={messageValueChangeHandler}
           onBlur={messageValueHandler}
           error={messageValueInputHasError}
-          errorMessage="입금할 금액을 다시 입력해주세요.(숫자만)"
+          errorMessage="거래내역에 남길 메시지를 입력해주세요(첫글자 공백 x)"
         />
       </div>
       <div
