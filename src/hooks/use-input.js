@@ -21,7 +21,6 @@ const useInput = (validate, initialValue = "") => {
     setIsTouched(false);
   };
   useEffect(() => {
-    console.log("Initial value:", initialValue);
     if (initialValue !== null) setValue(initialValue);
   }, [initialValue]);
 

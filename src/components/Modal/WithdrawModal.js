@@ -137,7 +137,7 @@ function DepositModal({ onClose, moimWalletId, setIsNew }) {
           justifyContent: "space-between",
         }}
       >
-        <Button onClick={doDepositToMoimWalletHandler}>입금</Button>
+        <Button onClick={doDepositToMoimWalletHandler}>송금</Button>
         <Button onClick={onClose}>Close</Button>
       </div>
     </Modal>
