@@ -12,11 +12,9 @@ const validateName = (name) => {
   return /^[가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z\s]+$/.test(name);
 };
 const validatePhone = (phone) => {
-  //return /^[0-9]{11}$/.test(phone);
   return /^0\d{1,2}(-|\))\d{3,4}-\d{4}$/.test(phone);
 };
 const validateBirth = (birth) => {
-  //return /^[0-9]{8}$/.test(birth);
   return /^(?:[0-9]{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[1,2][0-9]|3[0,1]))-[1-4][0-9]{6}$/.test(
     birth
   );
@@ -228,18 +226,6 @@ const SignUp = (props) => {
           error={pwInputHasError}
           errorMessage="8~16자의 영문 대/소문자, 숫자, 특수문자를 사용해 주세요."
         />
-        {/* <Input
-          type="password"
-          id="confirmation"
-          name="confirmation"
-          label="confirmation"
-          placeholder="비밀번호 확인 *"
-          required={true}
-          onChange={confirmationChangeHandler}
-          onBlur={confirmationBlurHandler}
-          error={confirmationInputHasError}
-          errorMessage="비밀번호가 일치하지 않습니다."
-        /> */}
         <input
           type="hidden"
           id="userType"

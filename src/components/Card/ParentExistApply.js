@@ -71,7 +71,6 @@ const ExistApply = (props) => {
         }
       );
 
-      console.log("승인 버튼 성공");
       const { startDate, endDate, duration } = response.data;
       window.location.reload();
     } catch (error) {

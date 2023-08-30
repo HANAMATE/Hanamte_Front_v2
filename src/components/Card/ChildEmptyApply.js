@@ -1,12 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { RiInformationFill } from "react-icons/ri";
-import {
-  FaWallet,
-  FaPercentage,
-  FaCoins,
-  FaMoneyCheck,
-  FaPlusCircle,
-} from "react-icons/fa";
+import { FaPlusCircle } from "react-icons/fa";
 
 import classes from "./EmptyApply.module.css";
 
